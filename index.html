@@ -166,7 +166,9 @@
             justify-content: center;
             align-items: center;
             border-radius: 8px;
-            border-bottom: 4px solid gray
+            border-bottom: 4px solid gray;
+            padding: 5px;
+            box-sizing: border-box;
         }
 
         .rl-item img {
@@ -203,6 +205,7 @@
             border-radius: 15px;
             border: 2px solid var(--ylw);
             box-shadow: 0 0 40px rgba(234, 179, 8, 0.3);
+            margin-bottom: 15px;
         }
 
         .res-box img {
@@ -235,7 +238,7 @@
             align-items: center;
             border: 1px dashed #555;
             text-align: center;
-            font-size: 11px;
+            font-size: 10px;
         }
 
         .upg-slot img {
@@ -438,51 +441,60 @@
     </div>
 
     <div id="previewArea" class="hidden">
-        <div class="c-box">
+        <div class="c-box" style="padding-bottom: 5px;">
             <h2 id="pTitle" style="margin-top:0;text-align:center;text-transform:uppercase;">Кейс</h2>
-            <div style="text-align:center;color:var(--gry);font-size:12px;margin-bottom:10px;">Содержимое и шансы:</div>
-            <div id="pList" style="max-height:300px;overflow-y:auto;padding-right:5px;margin-bottom:15px;"></div>
+
+            <div id="rouletteArea" class="hidden rl-box">
+                <div class="pointer"></div>
+                <div class="rl-line" id="rlLine"></div>
+            </div>
+
+            <div id="resArea" class="hidden res-box">
+                <h3 style="margin:0;color:#fff;">Ваш дроп:</h3>
+                <h2 id="wName" style="margin:10px 0; font-size: 16px;">Name</h2>
+                <img id="wImg" src="" onerror="this.src='https://placehold.co/200x140/1e293b/FFF?text=Скин'"><br>
+                <span
+                    style="color:var(--ylw);font-weight:bold;font-size:22px;text-shadow:0 0 10px rgba(234,179,8,0.5);">★
+                    <span id="wPrice">0</span></span><br><br>
+                <button class="btn btn-grn" onclick="startRoulette()">Еще раз</button>
+                <button class="btn btn-out" onclick="showSec('cases')">Забрать</button>
+            </div>
+
             <button class="btn btn-ylw" id="spinBtn" onclick="startRoulette()"
-                style="padding:15px;font-size:16px;">КРУТИТЬ</button>
+                style="padding:15px;font-size:16px;margin-bottom:15px;">КРУТИТЬ ЗА ★</button>
+
+            <div style="text-align:center;color:var(--gry);font-size:12px;margin-bottom:10px;">Содержимое и шансы:</div>
+            <div id="pList" style="max-height:250px;overflow-y:auto;padding-right:5px;margin-bottom:10px;"></div>
             <button class="btn btn-out" onclick="showSec('cases')">Назад в магазин</button>
         </div>
-    </div>
-
-    <div id="rouletteArea" class="hidden rl-box">
-        <div class="pointer"></div>
-        <div class="rl-line" id="rlLine"></div>
-    </div>
-    <div id="resArea" class="hidden res-box">
-        <h3 style="margin:0;color:#fff;">Ваш дроп:</h3>
-        <h2 id="wName" style="margin:10px 0;">Name</h2><img id="wImg" src=""><br>
-        <span style="color:var(--ylw);font-weight:bold;font-size:22px;text-shadow:0 0 10px rgba(234,179,8,0.5);">★ <span
-                id="wPrice">0</span></span><br><br>
-        <button class="btn btn-grn" onclick="startRoulette()">Еще раз</button>
-        <button class="btn btn-out" onclick="showSec('cases')">Забрать</button>
     </div>
 
     <div id="cases" class="sec">
         <div class="grid">
             <div class="card"><img
-                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0mVW0m_7zO6_cmnhD-Ml0juz--YXygED6rUo4ZWvydoXAdFQ3aF7X-QC7krjug8PpuM-bmiNluCEr4SuMzBywiAYMMLK8kEtnwQ">
+                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0mVW0m_7zO6_cmnhD-Ml0juz--YXygED6rUo4ZWvydoXAdFQ3aF7X-QC7krjug8PpuM-bmiNluCEr4SuMzBywiAYMMLK8kEtnwQ"
+                    onerror="this.src='https://placehold.co/100x80/1e293b/FFF?text=Кейс'">
                 <h4>Эко</h4>
                 <p style="color:var(--ylw);font-weight:bold;">★ 500</p><button class="btn"
                     onclick="openPrev('eco',500,'Кейс Эко')">Открыть</button>
             </div>
             <div class="card"><img
-                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0m1-Gnvn8Oq_UmnhD-Ml0juz--YXygED6-UY6ZGv0cYOQd1M4NVnV_Va4xe25hp-0u53LnSdh7D5iuyisxxw-LgA1">
+                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0m1-Gnvn8Oq_UmnhD-Ml0juz--YXygED6-UY6ZGv0cYOQd1M4NVnV_Va4xe25hp-0u53LnSdh7D5iuyisxxw-LgA1"
+                    onerror="this.src='https://placehold.co/100x80/1e293b/FFF?text=Кейс'">
                 <h4>Обычный</h4>
                 <p style="color:var(--ylw);font-weight:bold;">★ 1500</p><button class="btn"
                     onclick="openPrev('normal',1500,'Обычный Кейс')">Открыть</button>
             </div>
             <div class="card"><img
-                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0oZOOlP_1IbnQmXRu5Mx2gv2P8ImsjVDtrhA4N2rzII-ScAA7NV3RqVK4wrq6g5Dt78uc1zI97QxZ35rR">
+                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0oZOOlP_1IbnQmXRu5Mx2gv2P8ImsjVDtrhA4N2rzII-ScAA7NV3RqVK4wrq6g5Dt78uc1zI97QxZ35rR"
+                    onerror="this.src='https://placehold.co/100x80/1e293b/FFF?text=Кейс'">
                 <h4>Премиум</h4>
                 <p style="color:var(--ylw);font-weight:bold;">★ 5000</p><button class="btn"
                     onclick="openPrev('premium',5000,'Премиум Кейс')">Открыть</button>
             </div>
             <div class="card"><img
-                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkNqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ">
+                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkNqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ"
+                    onerror="this.src='https://placehold.co/100x80/1e293b/FFF?text=Кейс'">
                 <h4>Ножевой</h4>
                 <p style="color:var(--ylw);font-weight:bold;">★ 15000</p><button class="btn"
                     onclick="openPrev('knife',15000,'Ножевой Кейс')">Открыть</button>
@@ -525,12 +537,12 @@
 
     <div id="tasks" class="sec hidden">
         <div class="c-box" style="text-align:center;">
-            <h3 style="color:var(--ylw);margin-top:0;">Ежедневный бонус</h3>
+            <h3 style="color:var(--ylw);margin-top:0;text-shadow: 0 0 10px rgba(234,179,8,0.5);">Ежедневный бонус</h3>
             <p style="font-size:13px;color:var(--gry);">Забирай 250 ★ каждые 24 часа!</p><button class="btn btn-grn"
                 id="dailyBtn" onclick="claimDaily()">Забрать 250 ★</button>
         </div>
         <div class="c-box" style="text-align:center;">
-            <h3 style="color:var(--acc);margin-top:0;">Подписка</h3>
+            <h3 style="color:var(--acc);margin-top:0;text-shadow: 0 0 10px rgba(59,130,246,0.5);">Подписка</h3>
             <p style="font-size:13px;color:var(--gry);">Подпишись на <b>@speedytge</b> и получи +500 ★.</p><button
                 class="btn btn-ylw" id="subBtn" onclick="claimSub()">Подписаться</button>
         </div>
@@ -566,10 +578,10 @@
         const tg = window.Telegram.WebApp; tg.expand();
         const iUrl = "https://steamcommunity-a.akamaihd.net/economy/image/";
 
-        // ПОЛНАЯ БАЗА СКИНОВ С КАРТИНКАМИ
+        // БАЗА ДАННЫХ
         const db = {
             eco: [
-                { name: 'P250 | Дюна', rarity: 'common', price: 10, w: 60, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpopujwezhhwAMzcTFR09C_k4mClvnmJb_VlT1RsMhwj-zDo9j0hAawq0E9Z2r1JdTGdwU7ZwzRqVC5lrm60JO5vc7Pmns3pGB8stMvYt7U' },
+                { name: 'P250 | Песчаная дюна', rarity: 'common', price: 10, w: 70, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpopujwezhhwAMzcTFR09C_k4mClvnmJb_VlT1RsMhwj-zDo9j0hAawq0E9Z2r1JdTGdwU7ZwzRqVC5lrm60JO5vc7Pmns3pGB8stMvYt7U' },
                 { name: 'Nova | Орех', rarity: 'common', price: 30, w: 25, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou7umeldf0Ob3fDxBvYyJi46Hk_7nI7DflWhR7MZ1iurEpdSn1AbkrRRoY2GldoScd1RraFiE_FLtxO-6jZPq6ZufzSA1s3Qm-z-DyP9rK2A' },
                 { name: 'Glock-18 | Горелка', rarity: 'common', price: 80, w: 10, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposbaqKAxf0v73dDBH_t26q4S0m_7zO6_ck29Y_cg_2-yQpYmi0FHg-kQ9Yjv0JoGddlU2MA3Z8lLqyOnpgZDt6Z3JzyAwuSIj5HuJlwv330_5p-Rviw' },
                 { name: 'M4A4 | Магний', rarity: 'rare', price: 250, w: 4, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkMqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ' },
@@ -637,7 +649,6 @@
 
         function showSec(id) {
             document.querySelectorAll('.sec').forEach(e => e.classList.add('hidden')); document.getElementById('previewArea').classList.add('hidden');
-            document.getElementById('rouletteArea').classList.add('hidden'); document.getElementById('resArea').classList.add('hidden');
             document.getElementById(id).classList.remove('hidden'); document.querySelectorAll('.nav button').forEach(e => e.classList.remove('act'));
             document.getElementById('n-' + id).classList.add('act');
             if (id === 'inventory') rInv(); if (id === 'tasks') updTasks(); if (id === 'upgrades') rUpg();
@@ -647,31 +658,46 @@
         function openPrev(c, p, t) {
             cCase = c; cPrice = p; document.querySelectorAll('.sec').forEach(e => e.classList.add('hidden'));
             document.getElementById('pTitle').innerText = t; document.getElementById('spinBtn').innerText = `КРУТИТЬ ЗА ★ ${p}`;
+
+            // Показываем шансы
             let l = document.getElementById('pList'); l.innerHTML = '';
             let tw = db[c].reduce((s, i) => s + i.w, 0);
             [...db[c]].sort((a, b) => a.w - b.w).forEach(i => {
                 let ch = ((i.w / tw) * 100).toFixed(1);
-                l.innerHTML += `<div style="display:flex;align-items:center;padding:10px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:12px;" class="${i.rarity}"><img src="${i.img}" style="width:40px;height:30px;object-fit:contain;margin-right:10px"><span style="flex-grow:1">${i.name}<br><b style="color:var(--ylw)">★${i.price}</b></span><b>${ch}%</b></div>`;
+                l.innerHTML += `<div style="display:flex;align-items:center;padding:10px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:12px;" class="${i.rarity}"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'" style="width:40px;height:30px;object-fit:contain;margin-right:10px"><span style="flex-grow:1">${i.name}<br><b style="color:var(--ylw)">★${i.price}</b></span><b>${ch}%</b></div>`;
             });
+
+            // Прячем рулетку и результат, показываем кнопку крутить
+            document.getElementById('rouletteArea').classList.add('hidden');
+            document.getElementById('resArea').classList.add('hidden');
+            document.getElementById('spinBtn').classList.remove('hidden');
             document.getElementById('previewArea').classList.remove('hidden');
         }
 
         function startRoulette() {
             if (spn || bal < cPrice) { if (bal < cPrice) tg.showAlert('Мало звезд!'); return }
             bal -= cPrice; spn = 1; save();
-            document.getElementById('previewArea').classList.add('hidden'); document.getElementById('resArea').classList.add('hidden');
-            let rl = document.getElementById('rlLine'); document.getElementById('rouletteArea').classList.remove('hidden');
+
+            // Оставляем шансы, но прячем кнопку "Крутить" и показываем рулетку
+            document.getElementById('resArea').classList.add('hidden');
+            document.getElementById('spinBtn').classList.add('hidden');
+            let rl = document.getElementById('rlLine');
+            document.getElementById('rouletteArea').classList.remove('hidden');
+
             rl.style.transition = 'none'; rl.style.transform = 'translateX(0)'; rl.innerHTML = '';
 
             let vi = []; let tw = db[cCase].reduce((s, i) => s + i.w, 0);
             for (let i = 0; i < 50; i++) { let r = Math.random() * tw; for (let it of db[cCase]) { if (r < it.w) { vi.push(it); break; } r -= it.w; } }
             let wi = vi[40];
-            vi.forEach(i => rl.innerHTML += `<div class="rl-item ${i.rarity}"><img src="${i.img}"><div style="font-size:10px">${i.name.split('|')[0]}</div></div>`);
+
+            // В рулетке тоже полное имя скина, но обрезаем, если сильно длинное
+            vi.forEach(i => rl.innerHTML += `<div class="rl-item ${i.rarity}"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'"><div style="font-size:9px;text-align:center;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px;">${i.name}</div></div>`);
 
             setTimeout(() => { rl.style.transition = 'transform 4s cubic-bezier(0.1,0.8,0.2,1)'; rl.style.transform = `translateX(-${40 * 110 - window.innerWidth / 2 + 55}px)` }, 50);
             setTimeout(() => {
                 inv.push(wi); save(); spn = 0; tg.HapticFeedback.notificationOccurred('success');
-                document.getElementById('rouletteArea').classList.add('hidden'); document.getElementById('resArea').classList.remove('hidden');
+                document.getElementById('rouletteArea').classList.add('hidden');
+                document.getElementById('resArea').classList.remove('hidden');
                 document.getElementById('wName').innerText = wi.name; document.getElementById('wName').className = wi.rarity;
                 document.getElementById('wImg').src = wi.img; document.getElementById('wPrice').innerText = wi.price;
             }, 4050);
@@ -682,7 +708,7 @@
             if (inv.length === 0) { g.innerHTML = '<p style="grid-column:span 2;text-align:center;color:gray">Пусто.</p>'; return; }
             [...inv].sort((a, b) => b.price - a.price).forEach((i) => {
                 let rx = inv.findIndex(x => x === i);
-                g.innerHTML += `<div class="card ${i.rarity}"><img src="${i.img}"><div style="font-size:11px;height:30px;overflow:hidden">${i.name}</div><b style="color:var(--ylw)">★${i.price}</b><div style="display:flex;gap:5px;margin-top:5px"><button class="btn btn-grn" style="padding:6px;font-size:10px;margin:0" onclick="inv.splice(${rx},1);bal+=${i.price};save();rInv();tg.HapticFeedback.notificationOccurred('success')">Продать</button><button class="btn btn-out" style="padding:6px;font-size:10px;margin:0" onclick="wd(${rx})">Вывод</button></div></div>`;
+                g.innerHTML += `<div class="card ${i.rarity}"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'"><div style="font-size:11px;height:30px;overflow:hidden">${i.name}</div><b style="color:var(--ylw)">★${i.price}</b><div style="display:flex;gap:5px;margin-top:5px"><button class="btn btn-grn" style="padding:6px;font-size:10px;margin:0" onclick="inv.splice(${rx},1);bal+=${i.price};save();rInv();tg.HapticFeedback.notificationOccurred('success')">Продать</button><button class="btn btn-out" style="padding:6px;font-size:10px;margin:0" onclick="wd(${rx})">Вывод</button></div></div>`;
             });
         }
 
@@ -696,8 +722,8 @@
         // АПГРЕЙД
         function selU(t, i, x) {
             document.getElementById('uRes').innerText = '';
-            if (t === 'l') { uIn = i; uIx = x; document.getElementById('uL').innerHTML = `<img src="${i.img}"><br>${i.name.split('|')[0]}`; document.getElementById('uL').className = `upg-slot ${i.rarity}`; }
-            else { uTg = i; document.getElementById('uR').innerHTML = `<img src="${i.img}"><br>${i.name.split('|')[0]}`; document.getElementById('uR').className = `upg-slot ${i.rarity}`; }
+            if (t === 'l') { uIn = i; uIx = x; document.getElementById('uL').innerHTML = `<img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'"><br>${i.name}`; document.getElementById('uL').className = `upg-slot ${i.rarity}`; }
+            else { uTg = i; document.getElementById('uR').innerHTML = `<img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'"><br>${i.name}`; document.getElementById('uR').className = `upg-slot ${i.rarity}`; }
             calcU();
         }
         function clrU(s) {
@@ -725,10 +751,10 @@
         }
         function rUpg() {
             let l = document.getElementById('uInv'); l.innerHTML = '';
-            inv.forEach((i, x) => { l.innerHTML += `<div class="u-item ${i.rarity}" onclick="if(!upg)selU('l',inv[${x}],${x})"><img src="${i.img}" style="width:30px;height:20px;object-fit:contain"><span style="flex-grow:1;margin-left:5px;overflow:hidden">${i.name.split('|')[0]}</span><b style="color:var(--ylw)">★${i.price}</b></div>` });
+            inv.forEach((i, x) => { l.innerHTML += `<div class="u-item ${i.rarity}" onclick="if(!upg)selU('l',inv[${x}],${x})"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'" style="width:30px;height:20px;object-fit:contain"><span style="flex-grow:1;margin-left:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${i.name}</span><b style="color:var(--ylw)">★${i.price}</b></div>` });
             let t = document.getElementById('uTrg'); t.innerHTML = '';
             let all = [...db.normal, ...db.premium, ...db.knife, ...db.upgradeTargets].sort((a, b) => a.price - b.price).filter((v, i, a) => a.findIndex(x => x.name === v.name) === i);
-            all.forEach((i, x) => { t.innerHTML += `<div class="u-item ${i.rarity}" onclick="if(!upg)selU('r',db.normal.concat(db.premium,db.knife,db.upgradeTargets).find(y=>y.name==='${i.name}'),0)"><img src="${i.img}" style="width:30px;height:20px;object-fit:contain"><span style="flex-grow:1;margin-left:5px;overflow:hidden">${i.name.split('|')[0]}</span><b style="color:var(--ylw)">★${i.price}</b></div>` });
+            all.forEach((i, x) => { t.innerHTML += `<div class="u-item ${i.rarity}" onclick="if(!upg)selU('r',db.normal.concat(db.premium,db.knife,db.upgradeTargets).find(y=>y.name==='${i.name}'),0)"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'" style="width:30px;height:20px;object-fit:contain"><span style="flex-grow:1;margin-left:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${i.name}</span><b style="color:var(--ylw)">★${i.price}</b></div>` });
         }
 
         load();
