@@ -83,19 +83,12 @@
             margin-top: 5px;
             text-transform: uppercase;
             box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-            transition: 0.3s;
+            transition: 0.2s;
         }
 
         .btn:active {
             transform: scale(0.95);
             box-shadow: 0 0 5px rgba(59, 130, 246, 0.8);
-        }
-
-        .btn:disabled {
-            background: #475569;
-            color: var(--gry);
-            cursor: not-allowed;
-            box-shadow: none;
         }
 
         .btn-ylw {
@@ -114,13 +107,12 @@
             background: transparent;
             border: 1px solid var(--gry);
             color: #fff;
-            box-shadow: none;
         }
 
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px
+            gap: 10px
         }
 
         .card {
@@ -130,63 +122,13 @@
             text-align: center;
             border: 1px solid rgba(59, 130, 246, 0.3);
             backdrop-filter: blur(5px);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         .card img {
             width: 100%;
-            height: 80px;
+            height: 70px;
             object-fit: contain;
             filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-        }
-
-        .rl-box {
-            background: rgba(11, 17, 32, 0.8);
-            border: 2px solid var(--acc);
-            border-radius: 10px;
-            padding: 20px 0;
-            margin-bottom: 15px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
-        }
-
-        .rl-line {
-            display: flex;
-            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1)
-        }
-
-        .rl-item {
-            min-width: 100px;
-            height: 100px;
-            background: var(--cbg);
-            margin: 0 5px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 8px;
-            border-bottom: 4px solid gray;
-            padding: 5px;
-            box-sizing: border-box;
-        }
-
-        .rl-item img {
-            width: 80%;
-            height: 50px;
-            object-fit: contain
-        }
-
-        .pointer {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background: #ff3333;
-            z-index: 10;
-            box-shadow: 0 0 15px #ff3333, 0 0 5px #ff3333;
         }
 
         .c-box {
@@ -201,42 +143,114 @@
         .res-box {
             text-align: center;
             background: radial-gradient(circle, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 70%);
-            padding: 30px 15px;
+            padding: 20px 15px;
             border-radius: 15px;
             border: 2px solid var(--ylw);
             box-shadow: 0 0 40px rgba(234, 179, 8, 0.3);
             margin-bottom: 15px;
         }
 
-        .res-box img {
-            width: 200px;
-            height: 140px;
-            object-fit: contain;
-            margin: 15px 0;
-            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+        /* Мульти-открытие (кнопки) */
+        .multi-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        .multi-btn {
+            flex: 1;
+            background: transparent;
+            color: var(--gry);
+            border: none;
+            padding: 8px 0;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .multi-btn.act {
+            background: var(--acc);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Рулетка */
+        .rl-box {
+            background: rgba(11, 17, 32, 0.8);
+            border: 2px solid var(--acc);
+            border-radius: 10px;
+            padding: 20px 0;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rl-line {
+            display: flex;
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1)
+        }
+
+        .rl-item {
+            min-width: 90px;
+            height: 90px;
+            background: var(--cbg);
+            margin: 0 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            border-bottom: 4px solid gray;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .rl-item img {
+            width: 80%;
+            height: 40px;
+            object-fit: contain
+        }
+
+        .pointer {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: #ff3333;
+            z-index: 10;
+            box-shadow: 0 0 15px #ff3333;
+        }
+
+        /* Желто-черный апгрейд */
         .upg-arena {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.5);
+            background: #111;
             padding: 20px 10px;
             border-radius: 12px;
             border: 1px solid #333;
             margin-bottom: 15px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
         }
 
         .upg-slot {
             width: 30%;
             height: 100px;
-            background: #222;
+            background: #1a1a1a;
             border-radius: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border: 1px dashed #555;
+            border: 1px dashed #444;
             text-align: center;
             font-size: 10px;
         }
@@ -249,31 +263,32 @@
 
         .cc-box {
             position: relative;
-            width: 90px;
-            height: 90px;
-            margin-bottom: 15px;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
         }
 
         .cc {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: conic-gradient(var(--ylw) 0%, #333 0%);
+            background: conic-gradient(var(--ylw) 0%, #222 0%);
             position: absolute;
             top: 0;
             left: 0;
+            box-shadow: 0 0 15px rgba(234, 179, 8, 0.2);
         }
 
         .cc-in {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             background: #111;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 18px;
             color: var(--ylw);
             position: absolute;
             top: 10px;
@@ -293,15 +308,15 @@
 
         .u-ptr {
             position: absolute;
-            top: -10px;
+            top: -5px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
-            border-top: 15px solid white;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+            border-bottom: 15px solid var(--ylw);
+            filter: drop-shadow(0 0 5px var(--ylw));
         }
 
         .u-lists {
@@ -320,7 +335,7 @@
         }
 
         .u-item {
-            background: #2a2a2a;
+            background: #1a1a1a;
             padding: 8px;
             border-radius: 6px;
             margin-bottom: 6px;
@@ -329,7 +344,7 @@
             align-items: center;
             font-size: 11px;
             cursor: pointer;
-            border-left: 4px solid gray;
+            border-left: 3px solid gray;
         }
 
         .nav {
@@ -339,8 +354,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(15, 23, 42, 0.9);
-            padding: 12px 0;
+            background: rgba(15, 23, 42, 0.95);
+            padding: 10px 0;
             border-top: 1px solid rgba(59, 130, 246, 0.3);
             z-index: 100;
             backdrop-filter: blur(10px);
@@ -350,58 +365,24 @@
             background: none;
             border: none;
             color: var(--gry);
-            font-size: 12px;
+            font-size: 10px;
             cursor: pointer;
             font-weight: bold;
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: 0.3s;
+            padding: 5px;
         }
 
         .nav button.act {
             color: var(--acc);
-            text-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
             transform: translateY(-3px);
         }
 
         .nav button span {
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 4px;
-        }
-
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #090a0f;
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid var(--acc);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
         }
 
         .common {
@@ -412,36 +393,34 @@
         .rare {
             border-color: #4b69ff;
             color: #4b69ff;
-            box-shadow: inset 0 0 10px rgba(75, 105, 255, 0.2);
         }
 
         .epic {
             border-color: #8847ff;
             color: #8847ff;
-            box-shadow: inset 0 0 10px rgba(136, 71, 255, 0.2);
         }
 
         .gold {
             border-color: #ffd700;
             color: #ffd700;
-            box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .secret {
+            border-color: #ff0055;
+            color: #ff0055;
         }
     </style>
 </head>
 
 <body>
     <div class="stars"></div>
-    <div id="loader">
-        <div class="spinner"></div>
-        <h2>Синхронизация...</h2>
-    </div>
     <div class="header">
         <div>🍀 LuckyDrop</div>
         <div class="balance">★ <span id="stars">0</span></div>
     </div>
 
     <div id="previewArea" class="hidden">
-        <div class="c-box" style="padding-bottom: 5px;">
+        <div class="c-box" style="padding-bottom:10px;">
             <h2 id="pTitle" style="margin-top:0;text-align:center;text-transform:uppercase;">Кейс</h2>
 
             <div id="rouletteArea" class="hidden rl-box">
@@ -451,53 +430,61 @@
 
             <div id="resArea" class="hidden res-box">
                 <h3 style="margin:0;color:#fff;">Ваш дроп:</h3>
-                <h2 id="wName" style="margin:10px 0; font-size: 16px;">Name</h2>
-                <img id="wImg" src="" onerror="this.src='https://placehold.co/200x140/1e293b/FFF?text=Скин'"><br>
-                <span
-                    style="color:var(--ylw);font-weight:bold;font-size:22px;text-shadow:0 0 10px rgba(234,179,8,0.5);">★
-                    <span id="wPrice">0</span></span><br><br>
-                <button class="btn btn-grn" onclick="startRoulette()">Еще раз</button>
-                <button class="btn btn-out" onclick="showSec('cases')">Забрать</button>
+                <div id="resGrid" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:15px 0;">
+                </div>
+                <span style="color:var(--ylw);font-weight:bold;font-size:18px;">Общая стоимость: ★ <span
+                        id="wPriceTotal">0</span></span><br><br>
+
+                <button class="btn btn-ylw" id="sellDropBtn" onclick="sellCurrentDrop()">Продать всё за ★ 0</button>
+                <button class="btn btn-grn" onclick="startRoulette()">Открыть еще раз</button>
+                <button class="btn btn-out" onclick="showSec('cases')">Забрать в инвентарь</button>
             </div>
 
-            <button class="btn btn-ylw" id="spinBtn" onclick="startRoulette()"
-                style="padding:15px;font-size:16px;margin-bottom:15px;">КРУТИТЬ ЗА ★</button>
+            <div id="openControls">
+                <div class="multi-row">
+                    <button class="multi-btn act" id="m1" onclick="setMulti(1)">x1</button>
+                    <button class="multi-btn" id="m2" onclick="setMulti(2)">x2</button>
+                    <button class="multi-btn" id="m3" onclick="setMulti(3)">x3</button>
+                    <button class="multi-btn" id="m5" onclick="setMulti(5)">x5</button>
+                </div>
+                <button class="btn btn-ylw" id="spinBtn" onclick="startRoulette()"
+                    style="padding:15px;font-size:16px;margin-bottom:15px;">КРУТИТЬ ЗА ★</button>
 
-            <div style="text-align:center;color:var(--gry);font-size:12px;margin-bottom:10px;">Содержимое и шансы:</div>
-            <div id="pList" style="max-height:250px;overflow-y:auto;padding-right:5px;margin-bottom:10px;"></div>
-            <button class="btn btn-out" onclick="showSec('cases')">Назад в магазин</button>
+                <div style="text-align:center;color:var(--gry);font-size:12px;margin-bottom:10px;">Содержимое и шансы:
+                </div>
+                <div id="pList" style="max-height:200px;overflow-y:auto;padding-right:5px;margin-bottom:10px;"></div>
+                <button class="btn btn-out" onclick="showSec('cases')">Назад в магазин</button>
+            </div>
         </div>
     </div>
 
     <div id="cases" class="sec">
         <div class="grid">
-            <div class="card"><img
-                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0mVW0m_7zO6_cmnhD-Ml0juz--YXygED6rUo4ZWvydoXAdFQ3aF7X-QC7krjug8PpuM-bmiNluCEr4SuMzBywiAYMMLK8kEtnwQ"
-                    onerror="this.src='https://placehold.co/100x80/1e293b/FFF?text=Кейс'">
+            <div class="card"><img src="https://placehold.co/100x80/1e293b/FFF?text=ECO">
                 <h4>Эко</h4>
                 <p style="color:var(--ylw);font-weight:bold;">★ 500</p><button class="btn"
                     onclick="openPrev('eco',500,'Кейс Эко')">Открыть</button>
             </div>
-            <div class="card"><img
-                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0m1-Gnvn8Oq_UmnhD-Ml0juz--YXygED6-UY6ZGv0cYOQd1M4NVnV_Va4xe25hp-0u53LnSdh7D5iuyisxxw-LgA1"
-                    onerror="this.src='https://placehold.co/100x80/1e293b/FFF?text=Кейс'">
+            <div class="card"><img src="https://placehold.co/100x80/1e293b/FFF?text=NORMAL">
                 <h4>Обычный</h4>
                 <p style="color:var(--ylw);font-weight:bold;">★ 1500</p><button class="btn"
                     onclick="openPrev('normal',1500,'Обычный Кейс')">Открыть</button>
             </div>
-            <div class="card"><img
-                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0oZOOlP_1IbnQmXRu5Mx2gv2P8ImsjVDtrhA4N2rzII-ScAA7NV3RqVK4wrq6g5Dt78uc1zI97QxZ35rR"
-                    onerror="this.src='https://placehold.co/100x80/1e293b/FFF?text=Кейс'">
-                <h4>Премиум</h4>
+            <div class="card"><img src="https://placehold.co/100x80/1e293b/FFF?text=GOLD">
+                <h4>Золотой</h4>
                 <p style="color:var(--ylw);font-weight:bold;">★ 5000</p><button class="btn"
-                    onclick="openPrev('premium',5000,'Премиум Кейс')">Открыть</button>
+                    onclick="openPrev('gold',5000,'Золотой Кейс')">Открыть</button>
             </div>
-            <div class="card"><img
-                    src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkNqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ"
-                    onerror="this.src='https://placehold.co/100x80/1e293b/FFF?text=Кейс'">
+            <div class="card"><img src="https://placehold.co/100x80/1e293b/FFF?text=KNIFE">
                 <h4>Ножевой</h4>
                 <p style="color:var(--ylw);font-weight:bold;">★ 15000</p><button class="btn"
                     onclick="openPrev('knife',15000,'Ножевой Кейс')">Открыть</button>
+            </div>
+            <div class="card" style="grid-column: span 2; border-color: #ff0055;"><img
+                    src="https://placehold.co/200x80/1e293b/ff0055?text=SECRET">
+                <h4>Секретный кейс</h4>
+                <p style="color:var(--ylw);font-weight:bold;">★ 50000</p><button class="btn" style="background:#ff0055;"
+                    onclick="openPrev('secret',50000,'Секретный Кейс')">Рискнуть</button>
             </div>
         </div>
     </div>
@@ -535,42 +522,42 @@
         </div>
     </div>
 
-    <div id="tasks" class="sec hidden">
+    <div id="friends" class="sec hidden">
         <div class="c-box" style="text-align:center;">
-            <h3 style="color:var(--ylw);margin-top:0;text-shadow: 0 0 10px rgba(234,179,8,0.5);">Ежедневный бонус</h3>
-            <p style="font-size:13px;color:var(--gry);">Забирай 250 ★ каждые 24 часа!</p><button class="btn btn-grn"
-                id="dailyBtn" onclick="claimDaily()">Забрать 250 ★</button>
+            <h3 style="color:var(--ylw);margin-top:0;">Пригласи друга</h3>
+            <p style="font-size:12px;color:var(--gry);">Отправь ссылку другу. Когда он зайдет, вы оба получите бонус!
+            </p>
+            <input type="text" id="refLink" readonly
+                style="width:100%;padding:10px;background:#000;color:var(--acc);border:1px dashed var(--acc);border-radius:5px;text-align:center;margin-bottom:10px;">
+            <button class="btn btn-grn" onclick="copyRef()">Скопировать ссылку</button>
         </div>
         <div class="c-box" style="text-align:center;">
-            <h3 style="color:var(--acc);margin-top:0;text-shadow: 0 0 10px rgba(59,130,246,0.5);">Подписка</h3>
-            <p style="font-size:13px;color:var(--gry);">Подпишись на <b>@speedytge</b> и получи +500 ★.</p><button
-                class="btn btn-ylw" id="subBtn" onclick="claimSub()">Подписаться</button>
+            <h3 style="margin-top:0;">Ежедневный бонус</h3>
+            <button class="btn btn-ylw" id="dailyBtn" onclick="claimDaily()">Забрать 250 ★</button>
         </div>
     </div>
 
     <div id="profile" class="sec hidden">
         <div class="c-box">
-            <h3 style="margin-top:0;">Настройки Вывода</h3><input type="text" id="tUrl"
-                style="width:100%;padding:12px;margin-bottom:10px;background:rgba(0,0,0,0.5);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:8px;box-sizing:border-box;"
+            <h3 style="margin-top:0;">Вывод</h3><input type="text" id="tUrl"
+                style="width:100%;padding:12px;margin-bottom:10px;background:rgba(0,0,0,0.5);color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:8px;"
                 placeholder="Steam Trade URL..."><button class="btn btn-grn" onclick="saveUrl()">Сохранить
                 ссылку</button>
         </div>
         <div class="c-box">
-            <h3 style="margin-top:0;">Пополнение ★</h3>
-            <p style="font-size:12px;color:var(--gry);">Мгновенное начисление через Telegram Stars</p><button
-                class="btn"
-                style="background:#28a745;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;"
+            <h3 style="margin-top:0;">Донат ★</h3><button class="btn"
+                style="background:#28a745;margin-bottom:10px;display:flex;justify-content:space-between;"
                 onclick="buy(1000,15)"><span>Купить 1000 ★</span><b>15 XTR</b></button><button class="btn"
-                style="background:#28a745;display:flex;justify-content:space-between;align-items:center;"
+                style="background:#28a745;display:flex;justify-content:space-between;"
                 onclick="buy(5000,65)"><span>Купить 5000 ★</span><b>65 XTR</b></button>
         </div>
     </div>
 
     <div class="nav">
         <button id="n-cases" onclick="showSec('cases')" class="act"><span>📦</span>Кейсы</button>
-        <button id="n-inventory" onclick="showSec('inventory')"><span>🎒</span>Инвентарь</button>
+        <button id="n-inventory" onclick="showSec('inventory')"><span>🎒</span>Скины</button>
         <button id="n-upgrades" onclick="showSec('upgrades')"><span>⬆️</span>Апгрейд</button>
-        <button id="n-tasks" onclick="showSec('tasks')"><span>📋</span>Задания</button>
+        <button id="n-friends" onclick="showSec('friends')"><span>🤝</span>Друзья</button>
         <button id="n-profile" onclick="showSec('profile')"><span>👤</span>Профиль</button>
     </div>
 
@@ -578,57 +565,60 @@
         const tg = window.Telegram.WebApp; tg.expand();
         const iUrl = "https://steamcommunity-a.akamaihd.net/economy/image/";
 
-        // БАЗА ДАННЫХ
+        // ОБНОВЛЕННАЯ БАЗА СКИНОВ (Добавлены предметы и повышены шансы окупа в Эко)
         const db = {
             eco: [
-                { name: 'P250 | Песчаная дюна', rarity: 'common', price: 10, w: 70, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpopujwezhhwAMzcTFR09C_k4mClvnmJb_VlT1RsMhwj-zDo9j0hAawq0E9Z2r1JdTGdwU7ZwzRqVC5lrm60JO5vc7Pmns3pGB8stMvYt7U' },
+                { name: 'P250 | Песчаная дюна', rarity: 'common', price: 10, w: 50, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpopujwezhhwAMzcTFR09C_k4mClvnmJb_VlT1RsMhwj-zDo9j0hAawq0E9Z2r1JdTGdwU7ZwzRqVC5lrm60JO5vc7Pmns3pGB8stMvYt7U' },
                 { name: 'Nova | Орех', rarity: 'common', price: 30, w: 25, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou7umeldf0Ob3fDxBvYyJi46Hk_7nI7DflWhR7MZ1iurEpdSn1AbkrRRoY2GldoScd1RraFiE_FLtxO-6jZPq6ZufzSA1s3Qm-z-DyP9rK2A' },
-                { name: 'Glock-18 | Горелка', rarity: 'common', price: 80, w: 10, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposbaqKAxf0v73dDBH_t26q4S0m_7zO6_ck29Y_cg_2-yQpYmi0FHg-kQ9Yjv0JoGddlU2MA3Z8lLqyOnpgZDt6Z3JzyAwuSIj5HuJlwv330_5p-Rviw' },
-                { name: 'M4A4 | Магний', rarity: 'rare', price: 250, w: 4, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkMqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ' },
-                { name: 'AK-47 | Красная линия', rarity: 'epic', price: 1200, w: 1, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5lpKKqPrxN7LEmyVQ7MEpiLuX8I-k3QXsqRVlZ2GlIYPBdwc4YlvR8gTqxebpg8W_vM-fmHdgvCUn4CndmQv3308mIukPGA' }
+                { name: 'Glock-18 | Горелка', rarity: 'common', price: 80, w: 15, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposbaqKAxf0v73dDBH_t26q4S0m_7zO6_ck29Y_cg_2-yQpYmi0FHg-kQ9Yjv0JoGddlU2MA3Z8lLqyOnpgZDt6Z3JzyAwuSIj5HuJlwv330_5p-Rviw' },
+                { name: 'AK-47 | Африканская сетка', rarity: 'rare', price: 200, w: 8, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhnwMzJemkV092zh4WHl_bkMofIqWlQ-MBOhuDG_Zi731G2-0dkMTrwdoTEI1Q2Mg3RqVfsx7vo1JW8vp3P1zI97U5n-R-H' },
+                { name: 'M4A4 | Магний', rarity: 'rare', price: 450, w: 2, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkMqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ' }
             ],
             normal: [
-                { name: 'M4A4 | Магний', rarity: 'common', price: 250, w: 55, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkMqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ' },
-                { name: 'USP-S | Сайрекс', rarity: 'rare', price: 800, w: 25, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo6m1FBRp3_bGcTpN0924q4iOluHtfevVxzhTscYpjOqV8NmkigC280o6MWyicNXHdAQ2ZV3T8gToyOzrgp7ovpjMySNkpGB8snP8q3sA' },
-                { name: 'AK-47 | Красная линия', rarity: 'epic', price: 1200, w: 15, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5lpKKqPrxN7LEmyVQ7MEpiLuX8I-k3QXsqRVlZ2GlIYPBdwc4YlvR8gTqxebpg8W_vM-fmHdgvCUn4CndmQv3308mIukPGA' },
-                { name: 'AWP | Скоростной зверь', rarity: 'gold', price: 4000, w: 4, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FABz7PLfYQJG6d2inL-GkvP9Jrafw2lU6ccp0rqX8d2zjQbs_0RlZmmgd4-TIVA9NV2ErFW2we_pgcC_vp-bwXVg6CE8pSGKGk2Hqg' },
-                { name: 'AWP | Азимов', rarity: 'gold', price: 7000, w: 1, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2D4G65xz0-2ZpNmti1fl_xVva1qwclc8cApvMInmDQa2yO_m0ZTtutjMmHVg7HYr-z-DyI4jCxsS' }
+                { name: 'M4A4 | Магний', rarity: 'common', price: 450, w: 50, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkMqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ' },
+                { name: 'USP-S | Сайрекс', rarity: 'rare', price: 800, w: 30, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo6m1FBRp3_bGcTpN0924q4iOluHtfevVxzhTscYpjOqV8NmkigC280o6MWyicNXHdAQ2ZV3T8gToyOzrgp7ovpjMySNkpGB8snP8q3sA' },
+                { name: 'AK-47 | Красная линия', rarity: 'epic', price: 1500, w: 15, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5lpKKqPrxN7LEmyVQ7MEpiLuX8I-k3QXsqRVlZ2GlIYPBdwc4YlvR8gTqxebpg8W_vM-fmHdgvCUn4CndmQv3308mIukPGA' },
+                { name: 'AWP | Азимов', rarity: 'gold', price: 5000, w: 5, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2D4G65xz0-2ZpNmti1fl_xVva1qwclc8cApvMInmDQa2yO_m0ZTtutjMmHVg7HYr-z-DyI4jCxsS' }
             ],
-            premium: [
-                { name: 'USP-S | Сайрекс', rarity: 'common', price: 800, w: 40, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo6m1FBRp3_bGcTpN0924q4iOluHtfevVxzhTscYpjOqV8NmkigC280o6MWyicNXHdAQ2ZV3T8gToyOzrgp7ovpjMySNkpGB8snP8q3sA' },
-                { name: 'AK-47 | Красная линия', rarity: 'common', price: 1200, w: 35, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5lpKKqPrxN7LEmyVQ7MEpiLuX8I-k3QXsqRVlZ2GlIYPBdwc4YlvR8gTqxebpg8W_vM-fmHdgvCUn4CndmQv3308mIukPGA' },
-                { name: 'AWP | Скоростной зверь', rarity: 'rare', price: 4000, w: 15, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FABz7PLfYQJG6d2inL-GkvP9Jrafw2lU6ccp0rqX8d2zjQbs_0RlZmmgd4-TIVA9NV2ErFW2we_pgcC_vp-bwXVg6CE8pSGKGk2Hqg' },
-                { name: 'AWP | Азимов', rarity: 'epic', price: 7000, w: 8, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2D4G65xz0-2ZpNmti1fl_xVva1qwclc8cApvMInmDQa2yO_m0ZTtutjMmHVg7HYr-z-DyI4jCxsS' },
-                { name: 'M4A4 | Вой', rarity: 'gold', price: 20000, w: 2, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhz2v_Nfz5H_uO1gb-Gw_alIITfn2xZ_Ishi-TOyoD8j1yg-RE_Y2-gdYTHdlRvMFiE-APqxOu805Hu6pzByCAx7CMg-z-DyG2q8QvP' }
+            gold: [
+                { name: 'AK-47 | Красная линия', rarity: 'common', price: 1500, w: 45, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5lpKKqPrxN7LEmyVQ7MEpiLuX8I-k3QXsqRVlZ2GlIYPBdwc4YlvR8gTqxebpg8W_vM-fmHdgvCUn4CndmQv3308mIukPGA' },
+                { name: 'M4A1-S | Шедевр', rarity: 'rare', price: 3500, w: 30, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kcjhozezbDzhN09G_k4if2a_8ML_Wk1Rcw1RlvjnHptqki1Gy_kM9azqlcYSWJwE2Z1zT8wTswLy8hJHu7ZTNzSBk73Nw5nfVmhS1hxwfbeK5yQ' },
+                { name: 'AWP | Азимов', rarity: 'epic', price: 5000, w: 15, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2D4G65xz0-2ZpNmti1fl_xVva1qwclc8cApvMInmDQa2yO_m0ZTtutjMmHVg7HYr-z-DyI4jCxsS' },
+                { name: 'M4A4 | Вой', rarity: 'gold', price: 25000, w: 8, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhz2v_Nfz5H_uO1gb-Gw_alIITfn2xZ_Ishi-TOyoD8j1yg-RE_Y2-gdYTHdlRvMFiE-APqxOu805Hu6pzByCAx7CMg-z-DyG2q8QvP' },
+                { name: 'Керамбит | Волны', rarity: 'gold', price: 45000, w: 2, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2OTEcgFO_c-1mY-DkvbiM7_Sl29U18l4jeHVu43zjAex_UQ9az_xd4SVI1c3aFrQrFS8le2-gMK97c_InHpqsykgtH6OlhC-1B0eb7NshqWACQLJDgY1U1w' }
             ],
             knife: [
-                { name: 'Наваха | Пыльник', rarity: 'rare', price: 6000, w: 50, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0OP3fTgQ5dKyq4iOqPv9NLPF2DwEuZdw2LyTpNyh3QGxq0JpM22mddKRdg4-aA3T_Fe5xr-5gZ_quZqcmHM2vycg4H2ImB210wYMMLInH7rVQQ' },
-                { name: 'Наваха | Волны', rarity: 'epic', price: 8000, w: 30, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0OP3fThQ5dKlhZ-bgvx7m_zDlzxSuZUniOqS99SgjVSw-Utoaz2lcdecIVRvaVmE_lDswuq5hZDv7cidziBmsicntH_emBC3gUtEaLMpDxaY' },
-                { name: 'Скелетный нож | Градиент', rarity: 'gold', price: 25000, w: 15, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfwPjNfThW49KJh5C0k_b5MqjSg3husZ1i_LHCp9ihiQXk-ENkNW6hcNmXdFI2Zw7WrgO3xbju0MTtvp-YziRo63Qm43iDmxC_hwYMMLIZnnsgVA' },
-                { name: 'Керамбит | Волны', rarity: 'gold', price: 40000, w: 4, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2OTEcgFO_c-1mY-DkvbiM7_Sl29U18l4jeHVu43zjAex_UQ9az_xd4SVI1c3aFrQrFS8le2-gMK97c_InHpqsykgtH6OlhC-1B0eb7NshqWACQLJDgY1U1w' },
-                { name: 'Спорт. перчатки', rarity: 'gold', price: 80000, w: 1, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfwPjNfThW49KJnJm0kfjmILDSh2pC-sRzj-HPpoqtjVGyqkBkYzindoecegRrZljZ_ATvxee7hMfqtJrVnyb4nCRgslnO' }
+                { name: 'Наваха | Пыльник', rarity: 'rare', price: 8000, w: 50, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0OP3fTgQ5dKyq4iOqPv9NLPF2DwEuZdw2LyTpNyh3QGxq0JpM22mddKRdg4-aA3T_Fe5xr-5gZ_quZqcmHM2vycg4H2ImB210wYMMLInH7rVQQ' },
+                { name: 'Штык-нож | Ультрафиолет', rarity: 'epic', price: 18000, w: 30, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpotLu8JAllx8zJYAJA4tWxlpG0mvrxMInIqWZQ-Md4teXI8oThxlK1-ENlMWunJYSSdwRsZV2EqQe6xLu6jMe5vs7Lmndq7iQhtnzenkOyhxhIarg1wQ' },
+                { name: 'Керамбит | Волны', rarity: 'gold', price: 45000, w: 15, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2OTEcgFO_c-1mY-DkvbiM7_Sl29U18l4jeHVu43zjAex_UQ9az_xd4SVI1c3aFrQrFS8le2-gMK97c_InHpqsykgtH6OlhC-1B0eb7NshqWACQLJDgY1U1w' },
+                { name: 'Спорт. перчатки', rarity: 'gold', price: 80000, w: 5, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfwPjNfThW49KJnJm0kfjmILDSh2pC-sRzj-HPpoqtjVGyqkBkYzindoecegRrZljZ_ATvxee7hMfqtJrVnyb4nCRgslnO' }
             ],
-            upgradeTargets: [
-                { name: 'AWP | Гунгнир', rarity: 'gold', price: 150000, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FBRw7P7NYjV9-N24q42Ok_7hPvXQhW4A7cQh2e3Do9qmiQWyqBdpYmnxctDDIVA3aVnTrFLskrvu0ZLuupzP1zI97dM8t00' },
-                { name: 'AWP | История о драконе', rarity: 'gold', price: 250000, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17P7NdTRH-t26q4SZlvD7IITdn2xZ_Ishi-TOyoD8j1yg-RE_Y2-gdYTHdlRvMFiE-APqxOu805Hu6pzByCAx7CMg-z-DyG2q8QvP' }
+            secret: [
+                { name: 'Glock-18 | Градиент', rarity: 'gold', price: 15000, w: 50, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposbaqKAxf0v73cCxX7eOwmIWInOT1J-TUhGkH18h0juDU-MKn0QKyqUQ_MD_ydYWVcQE7Z1nZrFe6kObshZPt6smamiNiuSRw-z-DyOaVn2-I' },
+                { name: 'M4A4 | Вой', rarity: 'gold', price: 25000, w: 30, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhz2v_Nfz5H_uO1gb-Gw_alIITfn2xZ_Ishi-TOyoD8j1yg-RE_Y2-gdYTHdlRvMFiE-APqxOu805Hu6pzByCAx7CMg-z-DyG2q8QvP' },
+                { name: 'AWP | Гунгнир', rarity: 'secret', price: 150000, w: 15, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FBRw7P7NYjV9-N24q42Ok_7hPvXQhW4A7cQh2e3Do9qmiQWyqBdpYmnxctDDIVA3aVnTrFLskrvu0ZLuupzP1zI97dM8t00' },
+                { name: 'AWP | История о драконе', rarity: 'secret', price: 300000, w: 5, img: iUrl + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17P7NdTRH-t26q4SZlvD7IITdn2xZ_Ishi-TOyoD8j1yg-RE_Y2-gdYTHdlRvMFiE-APqxOu805Hu6pzByCAx7CMg-z-DyG2q8QvP' }
             ]
         };
 
-        let bal = 5000, inv = [], tUrl = '', lastDaily = 0, subDone = false, spn = 0;
+        let bal = 5000, inv = [], tUrl = '', lastDaily = 0, spn = 0;
         let uIn = null, uIx = -1, uTg = null, uCh = 0, upg = 0;
+        const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : 'guest';
+
+        // Мульти-открытие
+        let cCase = '', cPrice = 0, multi = 1;
+        let droppedItems = [];
 
         function save() {
-            tg.CloudStorage.setItem('ld_data', JSON.stringify({ b: bal, i: inv, t: tUrl, d: lastDaily, s: subDone }));
+            tg.CloudStorage.setItem('ld_data', JSON.stringify({ b: bal, i: inv, t: tUrl, d: lastDaily }));
             document.getElementById('stars').innerText = bal;
         }
 
         function load() {
             tg.CloudStorage.getItem('ld_data', (e, v) => {
-                if (v) {
-                    const d = JSON.parse(v); bal = d.b; inv = d.i; tUrl = d.t; lastDaily = d.d; subDone = d.s;
-                }
-                document.getElementById('loader').style.display = 'none';
+                if (v) { const d = JSON.parse(v); bal = d.b; inv = d.i; tUrl = d.t; lastDaily = d.d; }
                 document.getElementById('tUrl').value = tUrl;
+                document.getElementById('refLink').value = `https://t.me/LuckyCsDrop_bot?start=${userId}`;
                 updTasks(); save();
             });
         }
@@ -637,15 +627,10 @@
             const now = Date.now(); const dBtn = document.getElementById('dailyBtn');
             if (now - lastDaily < 86400000) { dBtn.disabled = true; dBtn.innerText = 'Завтра приходи'; }
             else { dBtn.disabled = false; dBtn.innerText = 'Забрать 250 ★'; }
-            const sBtn = document.getElementById('subBtn');
-            if (subDone) { sBtn.disabled = true; sBtn.innerText = 'Выполнено'; }
         }
 
         function claimDaily() { bal += 250; lastDaily = Date.now(); save(); updTasks(); tg.HapticFeedback.notificationOccurred('success'); tg.showAlert('+250 ★!'); }
-        function claimSub() {
-            tg.openTelegramLink('https://t.me/speedytge');
-            setTimeout(() => { if (!subDone) { bal += 500; subDone = true; save(); updTasks(); tg.HapticFeedback.notificationOccurred('success'); tg.showAlert('+500 ★!'); } }, 3000);
-        }
+        function copyRef() { navigator.clipboard.writeText(document.getElementById('refLink').value); tg.showAlert('Ссылка скопирована!'); }
 
         function showSec(id) {
             document.querySelectorAll('.sec').forEach(e => e.classList.add('hidden')); document.getElementById('previewArea').classList.add('hidden');
@@ -654,12 +639,18 @@
             if (id === 'inventory') rInv(); if (id === 'tasks') updTasks(); if (id === 'upgrades') rUpg();
         }
 
-        let cCase = '', cPrice = 0;
-        function openPrev(c, p, t) {
-            cCase = c; cPrice = p; document.querySelectorAll('.sec').forEach(e => e.classList.add('hidden'));
-            document.getElementById('pTitle').innerText = t; document.getElementById('spinBtn').innerText = `КРУТИТЬ ЗА ★ ${p}`;
+        function setMulti(m) {
+            multi = m;
+            document.querySelectorAll('.multi-btn').forEach(b => b.classList.remove('act'));
+            document.getElementById('m' + m).classList.add('act');
+            document.getElementById('spinBtn').innerText = `КРУТИТЬ ЗА ★ ${cPrice * multi}`;
+        }
 
-            // Показываем шансы
+        function openPrev(c, p, t) {
+            cCase = c; cPrice = p; setMulti(1);
+            document.querySelectorAll('.sec').forEach(e => e.classList.add('hidden'));
+            document.getElementById('pTitle').innerText = t;
+
             let l = document.getElementById('pList'); l.innerHTML = '';
             let tw = db[c].reduce((s, i) => s + i.w, 0);
             [...db[c]].sort((a, b) => a.w - b.w).forEach(i => {
@@ -667,40 +658,69 @@
                 l.innerHTML += `<div style="display:flex;align-items:center;padding:10px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:12px;" class="${i.rarity}"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'" style="width:40px;height:30px;object-fit:contain;margin-right:10px"><span style="flex-grow:1">${i.name}<br><b style="color:var(--ylw)">★${i.price}</b></span><b>${ch}%</b></div>`;
             });
 
-            // Прячем рулетку и результат, показываем кнопку крутить
             document.getElementById('rouletteArea').classList.add('hidden');
             document.getElementById('resArea').classList.add('hidden');
-            document.getElementById('spinBtn').classList.remove('hidden');
+            document.getElementById('openControls').classList.remove('hidden');
             document.getElementById('previewArea').classList.remove('hidden');
         }
 
         function startRoulette() {
-            if (spn || bal < cPrice) { if (bal < cPrice) tg.showAlert('Мало звезд!'); return }
-            bal -= cPrice; spn = 1; save();
+            let totalCost = cPrice * multi;
+            if (spn || bal < totalCost) { if (bal < totalCost) tg.showAlert('Мало звезд!'); return }
+            bal -= totalCost; spn = 1; save();
 
-            // Оставляем шансы, но прячем кнопку "Крутить" и показываем рулетку
+            document.getElementById('openControls').classList.add('hidden');
             document.getElementById('resArea').classList.add('hidden');
-            document.getElementById('spinBtn').classList.add('hidden');
             let rl = document.getElementById('rlLine');
             document.getElementById('rouletteArea').classList.remove('hidden');
 
             rl.style.transition = 'none'; rl.style.transform = 'translateX(0)'; rl.innerHTML = '';
 
-            let vi = []; let tw = db[cCase].reduce((s, i) => s + i.w, 0);
-            for (let i = 0; i < 50; i++) { let r = Math.random() * tw; for (let it of db[cCase]) { if (r < it.w) { vi.push(it); break; } r -= it.w; } }
-            let wi = vi[40];
+            droppedItems = [];
+            let tw = db[cCase].reduce((s, i) => s + i.w, 0);
+            for (let k = 0; k < multi; k++) {
+                let r = Math.random() * tw;
+                for (let it of db[cCase]) { if (r < it.w) { droppedItems.push(it); break; } r -= it.w; }
+            }
 
-            // В рулетке тоже полное имя скина, но обрезаем, если сильно длинное
-            vi.forEach(i => rl.innerHTML += `<div class="rl-item ${i.rarity}"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'"><div style="font-size:9px;text-align:center;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px;">${i.name}</div></div>`);
+            let vi = [];
+            for (let i = 0; i < 50; i++)vi.push(db[cCase][Math.floor(Math.random() * db[cCase].length)]);
+            vi[40] = droppedItems[0]; // Визуально останавливаемся на первом
 
-            setTimeout(() => { rl.style.transition = 'transform 4s cubic-bezier(0.1,0.8,0.2,1)'; rl.style.transform = `translateX(-${40 * 110 - window.innerWidth / 2 + 55}px)` }, 50);
+            vi.forEach(i => rl.innerHTML += `<div class="rl-item ${i.rarity}"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'"><div style="font-size:9px;text-align:center;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${i.name}</div></div>`);
+
+            setTimeout(() => { rl.style.transition = 'transform 4s cubic-bezier(0.1,0.8,0.2,1)'; rl.style.transform = `translateX(-${40 * 100 - window.innerWidth / 2 + 50}px)` }, 50);
+
             setTimeout(() => {
-                inv.push(wi); save(); spn = 0; tg.HapticFeedback.notificationOccurred('success');
+                // Добавляем предметы в инвентарь СРАЗУ
+                inv.push(...droppedItems); save(); spn = 0;
+                tg.HapticFeedback.notificationOccurred('success');
+
                 document.getElementById('rouletteArea').classList.add('hidden');
                 document.getElementById('resArea').classList.remove('hidden');
-                document.getElementById('wName').innerText = wi.name; document.getElementById('wName').className = wi.rarity;
-                document.getElementById('wImg').src = wi.img; document.getElementById('wPrice').innerText = wi.price;
+
+                // Рендерим выпавшие предметы
+                let grid = document.getElementById('resGrid'); grid.innerHTML = '';
+                let totalPrice = 0;
+                droppedItems.forEach(i => {
+                    totalPrice += i.price;
+                    grid.innerHTML += `<div style="background:rgba(30,41,59,0.9);padding:5px;border-radius:8px;border:1px solid gray;text-align:center;width:80px;" class="${i.rarity}"><img src="${i.img}" style="width:100%;height:40px;object-fit:contain"><div style="font-size:8px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${i.name}</div></div>`;
+                });
+
+                document.getElementById('wPriceTotal').innerText = totalPrice;
+                document.getElementById('sellDropBtn').innerText = `Продать всё за ★ ${totalPrice}`;
+
             }, 4050);
+        }
+
+        function sellCurrentDrop() {
+            let totalPrice = droppedItems.reduce((s, i) => s + i.price, 0);
+            bal += totalPrice;
+            // Удаляем последние добавленные предметы
+            inv.splice(-droppedItems.length, droppedItems.length);
+            save();
+            tg.HapticFeedback.notificationOccurred('success');
+            showSec('cases');
         }
 
         function rInv() {
@@ -712,7 +732,7 @@
             });
         }
 
-        function saveUrl() { tUrl = document.getElementById('tUrl').value; save(); tg.showAlert('Ок!'); tg.HapticFeedback.notificationOccurred('success'); }
+        function saveUrl() { tUrl = document.getElementById('tUrl').value; save(); tg.showAlert('Ок!'); }
         function buy(a, p) { tg.sendData(JSON.stringify({ action: 'buy', amount: a, price: p })) }
         function wd(x) {
             if (!tUrl || (!tUrl.includes('steamcommunity') && !tUrl.includes('steam://'))) return tg.showAlert('Укажите Trade URL в Профиле!');
@@ -722,27 +742,27 @@
         // АПГРЕЙД
         function selU(t, i, x) {
             document.getElementById('uRes').innerText = '';
-            if (t === 'l') { uIn = i; uIx = x; document.getElementById('uL').innerHTML = `<img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'"><br>${i.name}`; document.getElementById('uL').className = `upg-slot ${i.rarity}`; }
-            else { uTg = i; document.getElementById('uR').innerHTML = `<img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'"><br>${i.name}`; document.getElementById('uR').className = `upg-slot ${i.rarity}`; }
+            if (t === 'l') { uIn = i; uIx = x; document.getElementById('uL').innerHTML = `<img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'"><br>${i.name.split('|')[0]}`; document.getElementById('uL').className = `upg-slot ${i.rarity}`; }
+            else { uTg = i; document.getElementById('uR').innerHTML = `<img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'"><br>${i.name.split('|')[0]}`; document.getElementById('uR').className = `upg-slot ${i.rarity}`; }
             calcU();
         }
         function clrU(s) {
-            if (s === 'l') { uIn = null; uIx = -1; document.getElementById('uL').innerHTML = 'Отдаем'; document.getElementById('uL').className = 'upg-slot'; }
-            else { uTg = null; document.getElementById('uR').innerHTML = 'Получаем'; document.getElementById('uR').className = 'upg-slot'; }
+            if (s === 'l') { uIn = null; uIx = -1; document.getElementById('uL').innerHTML = '<span style="color:var(--gry);">Отдаем</span>'; document.getElementById('uL').className = 'upg-slot'; }
+            else { uTg = null; document.getElementById('uR').innerHTML = '<span style="color:var(--gry);">Получаем</span>'; document.getElementById('uR').className = 'upg-slot'; }
             calcU();
         }
         function calcU() {
-            let p = document.getElementById('uPtr'); p.style.transition = 'none'; p.style.transform = 'rotate(0)';
-            if (!uIn || !uTg) { uCh = 0; document.getElementById('uTxt').innerText = '0%'; document.getElementById('uCc').style.background = 'conic-gradient(var(--ylw) 0%,#333 0%)'; return }
+            let p = document.getElementById('uPtr'); p.style.transition = 'none'; p.style.transform = 'translateX(-50%) rotate(0)';
+            if (!uIn || !uTg) { uCh = 0; document.getElementById('uTxt').innerText = '0%'; document.getElementById('uCc').style.background = 'conic-gradient(var(--ylw) 0%,#222 0%)'; return }
             uCh = Math.min((uIn.price / uTg.price) * 100, 100);
-            document.getElementById('uTxt').innerText = uCh.toFixed(1) + '%'; document.getElementById('uCc').style.background = `conic-gradient(var(--ylw) ${uCh}%,#333 0%)`;
+            document.getElementById('uTxt').innerText = uCh.toFixed(1) + '%'; document.getElementById('uCc').style.background = `conic-gradient(var(--ylw) ${uCh}%,#222 0%)`;
         }
         function doUpg() {
             if (upg) return; if (!uIn || !uTg) return tg.showAlert('Выбери скины!');
             upg = 1; document.getElementById('uRes').innerText = 'КРУТИМ...'; document.getElementById('uRes').style.color = '#fff';
             inv.splice(uIx, 1); save();
             let r = Math.random() * 100, win = r <= uCh, deg = uCh * 3.6, td = win ? (Math.random() * (deg - 2) + 1) : (deg + Math.random() * (360 - deg - 2) + 1);
-            let p = document.getElementById('uPtr'); p.style.transition = 'transform 3.5s cubic-bezier(0.1,0.8,0.2,1)'; p.style.transform = `rotate(${360 * 5 + td}deg)`;
+            let p = document.getElementById('uPtr'); p.style.transition = 'transform 3.5s cubic-bezier(0.1,0.8,0.2,1)'; p.style.transform = `translateX(-50%) rotate(${360 * 5 + td}deg)`;
             setTimeout(() => {
                 if (win) { inv.push(uTg); document.getElementById('uRes').style.color = '#10b981'; document.getElementById('uRes').innerText = 'УСПЕШНО!'; tg.HapticFeedback.notificationOccurred('success') }
                 else { document.getElementById('uRes').style.color = '#ef4444'; document.getElementById('uRes').innerText = 'СГОРЕЛ...'; tg.HapticFeedback.notificationOccurred('error') }
@@ -753,8 +773,8 @@
             let l = document.getElementById('uInv'); l.innerHTML = '';
             inv.forEach((i, x) => { l.innerHTML += `<div class="u-item ${i.rarity}" onclick="if(!upg)selU('l',inv[${x}],${x})"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'" style="width:30px;height:20px;object-fit:contain"><span style="flex-grow:1;margin-left:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${i.name}</span><b style="color:var(--ylw)">★${i.price}</b></div>` });
             let t = document.getElementById('uTrg'); t.innerHTML = '';
-            let all = [...db.normal, ...db.premium, ...db.knife, ...db.upgradeTargets].sort((a, b) => a.price - b.price).filter((v, i, a) => a.findIndex(x => x.name === v.name) === i);
-            all.forEach((i, x) => { t.innerHTML += `<div class="u-item ${i.rarity}" onclick="if(!upg)selU('r',db.normal.concat(db.premium,db.knife,db.upgradeTargets).find(y=>y.name==='${i.name}'),0)"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'" style="width:30px;height:20px;object-fit:contain"><span style="flex-grow:1;margin-left:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${i.name}</span><b style="color:var(--ylw)">★${i.price}</b></div>` });
+            let all = [...db.normal, ...db.gold, ...db.knife, ...db.secret].sort((a, b) => a.price - b.price).filter((v, i, a) => a.findIndex(x => x.name === v.name) === i);
+            all.forEach((i, x) => { t.innerHTML += `<div class="u-item ${i.rarity}" onclick="if(!upg)selU('r',db.normal.concat(db.gold,db.knife,db.secret).find(y=>y.name==='${i.name}'),0)"><img src="${i.img}" onerror="this.src='https://placehold.co/80x60/1e293b/FFF?text=Скин'" style="width:30px;height:20px;object-fit:contain"><span style="flex-grow:1;margin-left:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${i.name}</span><b style="color:var(--ylw)">★${i.price}</b></div>` });
         }
 
         load();
