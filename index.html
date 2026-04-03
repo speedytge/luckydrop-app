@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckyDrop</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 70px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .balance {
+            background: #1e293b;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #fbbf24;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .btn:active {
+            background: #2563eb;
+        }
+
+        .btn:disabled {
+            background: #475569;
+            color: #94a3b8;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-around;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0f172a;
+            padding: 15px 0;
+            border-top: 1px solid #1e293b;
+        }
+
+        .nav button {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .nav button.active {
+            color: #3b82f6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div style="font-size: 1.2rem; font-weight: bold;">🍀 LuckyDrop</div>
+        <div class="balance">★ <span id="stars">0</span></div>
+    </div>
+
+    <div id="cases" class="section">
+        <div class="card">
+            <h3>Кейс Эко</h3>
+            <p>Цена: ★ 500</p>
+            <button class="btn" onclick="openCase(500)">Открыть кейс</button>
+        </div>
+        <div class="card">
+            <h3>Золотой кейс</h3>
+            <p>Цена: ★ 1500</p>
+            <button class="btn" onclick="openCase(1500)">Открыть кейс</button>
+        </div>
+    </div>
+
+    <div id="tasks" class="section hidden">
+        <div class="card">
+            <h3>Задания для получения звезд</h3>
+            <p>Подпишись на наш ТГ-канал (+500 ★)</p>
+            <button class="btn" id="task-sub" onclick="completeTask()">Подписаться и получить</button>
+        </div>
+    </div>
+
+    <div id="refs" class="section hidden">
+        <div class="card">
+            <h3>Приглашай друзей</h3>
+            <p>Получай ★ 200 за каждого друга!</p>
+            <button class="btn" onclick="copyRefLink()">Скопировать ссылку</button>
+        </div>
+    </div>
+
+    <div class="nav">
+        <button onclick="showSection('cases', this)" class="active">Кейсы</button>
+        <button onclick="showSection('tasks', this)">Задания</button>
+        <button onclick="showSection('refs', this)">Рефералы</button>
+    </div>
+
+    <script>
+        // Инициализация Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Разворачиваем на весь экран
+
+        // Баланс (в реальном проекте должен браться из базы данных!)
+        let balance = 0;
+
+        function updateBalance() {
+            document.getElementById('stars').innerText = balance;
+        }
+
+        function openCase(price) {
+            if (balance >= price) {
+                balance -= price;
+                updateBalance();
+                tg.showAlert('🎉 Успех! Тебе выпал: AK-47 | Красная линия');
+            } else {
+                tg.showAlert('❌ Недостаточно звезд! Выполни задания в меню.');
+            }
+        }
+
+        function completeTask() {
+            // Открываем канал
+            tg.openTelegramLink('https://t.me/telegram'); // <-- Вставь ссылку на свой канал
+
+            // Имитация проверки подписки (в реальности это делает бот через API)
+            setTimeout(() => {
+                balance += 500;
+                updateBalance();
+                const btn = document.getElementById('task-sub');
+                btn.innerText = '✅ Выполнено';
+                btn.disabled = true;
+                tg.showAlert('Начислено 500 звезд за подписку!');
+            }, 3000);
+        }
+
+        function copyRefLink() {
+            // Генерируем уникальную ссылку с ID пользователя
+            const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : 'test_id';
+            const botUsername = 'ТвойБот_bot'; // <-- Вставь юзернейм своего бота
+            const refLink = `https://t.me/${botUsername}?start=${userId}`;
+
+            navigator.clipboard.writeText(refLink).then(() => {
+                tg.showAlert('Ссылка скопирована! Отправь её друзьям.');
+            });
+        }
+
+        function showSection(id, btnElement) {
+            // Прячем все секции
+            document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
+            // Показываем нужную
+            document.getElementById(id).classList.remove('hidden');
+
+            // Обновляем цвет кнопок
+            document.querySelectorAll('.nav button').forEach(el => el.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
