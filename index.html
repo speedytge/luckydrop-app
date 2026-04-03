@@ -4,14 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuckyDrop</title>
+    <meta name="referrer" content="no-referrer">
+
+    <title>LuckyDrop CS2</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        /* БАЗОВЫЕ НАСТРОЙКИ И ЦВЕТА */
         :root {
             --bg-dark: #0f172a;
             --card-bg: #1e293b;
             --accent: #3b82f6;
             --upgrade-yellow: #eab308;
+            --text-gray: #94a3b8;
         }
 
         body {
@@ -20,13 +24,14 @@
             font-family: 'Segoe UI', Tahoma, sans-serif;
             margin: 0;
             padding: 15px;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
         }
 
         .hidden {
             display: none !important;
         }
 
+        /* ШАПКА И БАЛАНС */
         .header {
             display: flex;
             justify-content: space-between;
@@ -40,8 +45,10 @@
             border-radius: 10px;
             font-weight: bold;
             color: var(--upgrade-yellow);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
+        /* КНОПКИ */
         .btn {
             background: var(--accent);
             color: white;
@@ -53,10 +60,11 @@
             font-weight: bold;
             margin-top: 5px;
             transition: 0.2s;
+            text-transform: uppercase;
         }
 
         .btn:active {
-            transform: scale(0.98);
+            transform: scale(0.95);
         }
 
         .btn-yellow {
@@ -69,30 +77,39 @@
             color: white;
         }
 
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--text-gray);
+            color: white;
+        }
+
+        /* СЕТКА КАРТОЧЕК (МАГАЗИН И ИНВЕНТАРЬ) */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
 
         .card {
             background: var(--card-bg);
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 12px;
             text-align: center;
             border: 1px solid #334155;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
         .card img {
             width: 100%;
             height: 80px;
             object-fit: contain;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
+        /* РУЛЕТКА */
         .roulette-container {
             background: #0b1120;
             border: 2px solid var(--accent);
@@ -101,6 +118,7 @@
             margin-bottom: 15px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
         }
 
         .roulette-line {
@@ -122,7 +140,7 @@
         }
 
         .roulette-item img {
-            width: 70%;
+            width: 80%;
             height: 50px;
             object-fit: contain;
         }
@@ -139,52 +157,57 @@
             box-shadow: 0 0 10px red;
         }
 
+        /* МЕНЮ ПРЕДОСМОТРА И КОНТЕНТА */
         .case-contents {
             background: var(--card-bg);
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 15px;
-            margin-top: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #334155;
         }
 
         .content-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px;
+            padding: 10px 8px;
             border-bottom: 1px solid #334155;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .content-item img {
-            width: 40px;
-            height: 30px;
+            width: 50px;
+            height: 35px;
             object-fit: contain;
-            margin-right: 10px;
+            margin-right: 12px;
         }
 
+        /* ЭКРАН ВЫИГРЫША */
         .result-screen {
             text-align: center;
             background: radial-gradient(circle, #1e293b 0%, #0f172a 70%);
-            padding: 30px 15px;
+            padding: 40px 15px;
             border-radius: 15px;
-            border: 1px solid var(--accent);
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
         }
 
         .result-screen img {
-            width: 200px;
-            height: 150px;
+            width: 220px;
+            height: 160px;
             object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
             margin: 20px 0;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
         }
 
+        /* АПГРЕЙД */
         .upg-arena {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: #111;
             padding: 20px 10px;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid #333;
             margin-bottom: 15px;
         }
@@ -201,10 +224,12 @@
             border: 1px dashed #555;
             text-align: center;
             font-size: 11px;
+            padding: 5px;
+            box-sizing: border-box;
         }
 
         .upg-slot img {
-            width: 80%;
+            width: 90%;
             height: 50px;
             object-fit: contain;
         }
@@ -243,7 +268,7 @@
             justify-content: center;
             align-items: center;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 18px;
             color: var(--upgrade-yellow);
             position: absolute;
             top: 10px;
@@ -251,7 +276,6 @@
             z-index: 5;
         }
 
-        /* Вращающийся курсор */
         .pointer-container {
             position: absolute;
             top: 0;
@@ -264,15 +288,15 @@
 
         .upg-pointer {
             position: absolute;
-            top: -10px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 15px solid white;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 18px solid white;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
         }
 
         .upg-lists {
@@ -287,21 +311,23 @@
             border-radius: 10px;
             height: 250px;
             overflow-y: auto;
+            border: 1px solid #333;
         }
 
         .upg-item {
             background: #2a2a2a;
             padding: 8px;
-            border-radius: 5px;
-            margin-bottom: 5px;
+            border-radius: 6px;
+            margin-bottom: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 11px;
             cursor: pointer;
-            border-left: 3px solid gray;
+            border-left: 4px solid gray;
         }
 
+        /* ЦВЕТА РЕДКОСТИ (РАМКИ И ТЕКСТ) */
         .common {
             border-color: #b0c3d9 !important;
             color: #b0c3d9;
@@ -322,6 +348,14 @@
             color: #d32ce6;
         }
 
+        .gold {
+            border-color: #ffd700 !important;
+            color: #ffd700;
+        }
+
+        /* Для ножей */
+
+        /* ИНПУТЫ И ФОРМЫ */
         .input-field {
             width: 100%;
             padding: 12px;
@@ -330,9 +364,11 @@
             background: #0b1120;
             color: white;
             margin-bottom: 10px;
+            margin-top: 5px;
             box-sizing: border-box;
         }
 
+        /* НИЖНЕЕ МЕНЮ НАВИГАЦИИ */
         .nav {
             display: flex;
             justify-content: space-around;
@@ -341,7 +377,7 @@
             left: 0;
             right: 0;
             background: var(--bg-dark);
-            padding: 10px 0;
+            padding: 12px 0;
             border-top: 1px solid var(--card-bg);
             z-index: 100;
         }
@@ -349,7 +385,7 @@
         .nav button {
             background: none;
             border: none;
-            color: #94a3b8;
+            color: var(--text-gray);
             font-size: 12px;
             cursor: pointer;
             font-weight: bold;
@@ -357,46 +393,60 @@
             flex-direction: column;
             align-items: center;
             padding: 5px;
+            transition: 0.2s;
         }
 
         .nav button.active {
             color: var(--accent);
+            transform: translateY(-3px);
         }
 
         .nav button span {
             font-size: 20px;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
     </style>
 </head>
 
 <body>
     <div class="header">
-        <div style="font-size: 1.2rem; font-weight: bold;">🍀 LuckyDrop</div>
+        <div style="font-size: 1.3rem; font-weight: 800;">🍀 LuckyDrop</div>
         <div class="balance">★ <span id="stars">0</span></div>
     </div>
 
-    <div id="rouletteArea" class="hidden">
-        <div class="roulette-container">
-            <div class="pointer"></div>
-            <div class="roulette-line" id="rouletteLine"></div>
-        </div>
+    <div id="previewArea" class="hidden">
         <div class="case-contents">
-            <h4 style="margin: 0 0 10px 0; text-align: center;">В этом кейсе:</h4>
-            <div id="caseItemsList"></div>
+            <h2 id="previewTitle" style="margin-top:0; text-align:center; text-transform:uppercase;">Название кейса</h2>
+            <div style="text-align: center; color: var(--text-gray); margin-bottom: 15px; font-size: 14px;">Содержимое и
+                шансы:</div>
+
+            <div id="previewItemsList" style="max-height: 350px; overflow-y: auto; padding-right: 5px;"></div>
+
+            <button class="btn btn-yellow" id="startSpinBtn" style="margin-top:20px; font-size:16px; padding:15px;"
+                onclick="startRoulette()">КРУТИТЬ ЗА ★</button>
+            <button class="btn btn-outline" onclick="showSection('cases')">Вернуться в магазин</button>
         </div>
-        <button class="btn" style="margin-top: 15px;" onclick="showSection('cases')">Назад</button>
+    </div>
+
+    <div id="rouletteArea" class="hidden roulette-container">
+        <div class="pointer"></div>
+        <div class="roulette-line" id="rouletteLine"></div>
     </div>
 
     <div id="resultArea" class="hidden result-screen">
-        <h3 style="margin:0; color: #fff;">Выпал скин:</h3>
-        <h2 id="winName" style="margin: 10px 0;">Item Name</h2>
+        <h3 style="margin:0; color: #fff; text-transform: uppercase;">Поздравляем! Ваш дроп:</h3>
+        <h2 id="winName" style="margin: 15px 0; font-size: 22px;">Item Name</h2>
+
         <img id="winImg" src="" alt="Скин">
-        <p style="color: var(--upgrade-yellow); font-weight: bold; font-size: 18px;">Цена: ★ <span
-                id="winPrice">0</span></p>
-        <button class="btn" id="reopenBtn" onclick="reopenCurrentCase()">Еще раз</button>
-        <button class="btn" style="background: transparent; border: 1px solid #475569;" onclick="showSection('cases')">В
-            меню</button>
+
+        <div
+            style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px; display: inline-block; margin-bottom: 20px;">
+            <p style="color: var(--upgrade-yellow); font-weight: bold; font-size: 20px; margin: 0;">Цена: ★ <span
+                    id="winPrice">0</span></p>
+        </div>
+
+        <button class="btn btn-green" id="reopenBtn" onclick="startRoulette()">Открыть еще раз</button>
+        <button class="btn btn-outline" onclick="showSection('cases')">Забрать в инвентарь</button>
     </div>
 
     <div id="cases" class="section">
@@ -404,43 +454,106 @@
             <div class="card">
                 <img
                     src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0mVW0m_7zO6_cmnhD-Ml0juz--YXygED6rUo4ZWvydoXAdFQ3aF7X-QC7krjug8PpuM-bmiNluCEr4SuMzBywiAYMMLK8kEtnwQ">
-                <h4>Эко (Ширп)</h4>
-                <p style="color: var(--upgrade-yellow); font-weight:bold; margin:0;">★ 500</p>
-                <button class="btn" onclick="openRouletteScreen('eco', 500)">Открыть</button>
+                <h4 style="margin: 10px 0 5px 0;">Кейс Эко</h4>
+                <p style="color: var(--text-gray); font-size: 11px; margin: 0 0 10px 0;">Дешевый дроп</p>
+                <p style="color: var(--upgrade-yellow); font-weight:bold; margin:0 0 10px 0; font-size: 16px;">★ 500</p>
+                <button class="btn" onclick="openPreview('eco', 500, 'Кейс Эко')">Посмотреть</button>
             </div>
+
             <div class="card">
                 <img
                     src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0m1-Gnvn8Oq_UmnhD-Ml0juz--YXygED6-UY6ZGv0cYOQd1M4NVnV_Va4xe25hp-0u53LnSdh7D5iuyisxxw-LgA1">
-                <h4>Обычный</h4>
-                <p style="color: var(--upgrade-yellow); font-weight:bold; margin:0;">★ 1500</p>
-                <button class="btn" onclick="openRouletteScreen('normal', 1500)">Открыть</button>
+                <h4 style="margin: 10px 0 5px 0;">Обычный</h4>
+                <p style="color: var(--text-gray); font-size: 11px; margin: 0 0 10px 0;">Средний риск</p>
+                <p style="color: var(--upgrade-yellow); font-weight:bold; margin:0 0 10px 0; font-size: 16px;">★ 1500
+                </p>
+                <button class="btn" onclick="openPreview('normal', 1500, 'Обычный Кейс')">Посмотреть</button>
             </div>
+
             <div class="card">
                 <img
                     src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgoWeabqOANf-r-fFAzE2ci0oZOOlP_1IbnQmXRu5Mx2gv2P8ImsjVDtrhA4N2rzII-ScAA7NV3RqVK4wrq6g5Dt78uc1zI97QxZ35rR">
-                <h4>Премиум</h4>
-                <p style="color: var(--upgrade-yellow); font-weight:bold; margin:0;">★ 5000</p>
-                <button class="btn" onclick="openRouletteScreen('premium', 5000)">Открыть</button>
+                <h4 style="margin: 10px 0 5px 0;">Премиум</h4>
+                <p style="color: var(--text-gray); font-size: 11px; margin: 0 0 10px 0;">Хороший окуп</p>
+                <p style="color: var(--upgrade-yellow); font-weight:bold; margin:0 0 10px 0; font-size: 16px;">★ 5000
+                </p>
+                <button class="btn" onclick="openPreview('premium', 5000, 'Премиум Кейс')">Посмотреть</button>
             </div>
+
             <div class="card">
                 <img
                     src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkNqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ">
-                <h4>Ножевой</h4>
-                <p style="color: var(--upgrade-yellow); font-weight:bold; margin:0;">★ 15000</p>
-                <button class="btn" onclick="openRouletteScreen('knife', 15000)">Открыть</button>
+                <h4 style="margin: 10px 0 5px 0;">Ножевой</h4>
+                <p style="color: var(--text-gray); font-size: 11px; margin: 0 0 10px 0;">Только ножи и перчатки</p>
+                <p style="color: var(--upgrade-yellow); font-weight:bold; margin:0 0 10px 0; font-size: 16px;">★ 15000
+                </p>
+                <button class="btn" onclick="openPreview('knife', 15000, 'Ножевой Кейс')">Посмотреть</button>
             </div>
         </div>
     </div>
 
     <div id="inventory" class="section hidden">
-        <h3 style="text-align: center;">Твои скины</h3>
+        <h2 style="text-align: center; margin-top: 0;">Твой инвентарь</h2>
         <div class="grid" id="invGrid"></div>
+    </div>
+
+    <div id="tasks" class="section hidden">
+        <div class="case-contents">
+            <h2 style="margin-top:0;">Бесплатные ★</h2>
+            <p style="font-size:13px; color:var(--text-gray);">Выполняй задания, чтобы пополнить баланс без доната!</p>
+
+            <div
+                style="background:#0f172a; padding:15px; border-radius:10px; border:1px solid #3b82f6; margin-top: 15px;">
+                <h3 style="margin:0 0 10px 0;">Подписка на Telegram</h3>
+                <p style="font-size:13px; margin:0 0 10px 0;">Подпишись на официальный канал автора <b>@speedytge</b>,
+                    чтобы следить за обновлениями бота.</p>
+                <p style="color:var(--upgrade-yellow); font-weight:bold; font-size: 16px; margin:0 0 15px 0;">Награда:
+                    +500 ★</p>
+                <button class="btn" id="subBtn" onclick="checkSubscription()">Подписаться и забрать</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="profile" class="section hidden">
+        <div class="case-contents">
+            <h2 style="margin-top:0;">Настройки Вывода</h2>
+            <p style="font-size: 12px; color: var(--text-gray); margin-top: 0;">Укажите вашу Steam Trade URL, чтобы
+                администратор смог отправить вам выигранные скины.</p>
+
+            <label style="font-size: 12px; font-weight: bold;">Твоя ссылка на обмен:</label>
+            <input type="text" id="tradeUrlInput" class="input-field"
+                placeholder="https://steamcommunity.com/tradeoffer/new/...">
+
+            <button class="btn btn-green" onclick="saveTradeUrl()">Сохранить ссылку</button>
+        </div>
+
+        <div class="case-contents">
+            <h2 style="margin-top:0;">Магазин ★</h2>
+            <p style="font-size: 12px; color: var(--text-gray);">Покупка звезд осуществляется через официальную валюту
+                Telegram Stars. Бот пришлет счет в чат.</p>
+
+            <button class="btn"
+                style="background:#28a745; display:flex; justify-content:space-between; align-items:center; padding: 15px;"
+                onclick="buyStars(1000, 15)">
+                <span>Купить 1000 ★</span>
+                <span style="background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 5px;">15 XTR</span>
+            </button>
+
+            <button class="btn"
+                style="background:#28a745; display:flex; justify-content:space-between; align-items:center; padding: 15px; margin-top: 10px;"
+                onclick="buyStars(5000, 65)">
+                <span>Купить 5000 ★</span>
+                <span style="background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 5px;">65 XTR</span>
+            </button>
+        </div>
     </div>
 
     <div id="upgrades" class="section hidden">
         <div class="upg-arena">
-            <div class="upg-slot" id="slotLeft" onclick="clearUpgradeSlot('left')"><span style="color:gray;">Твой
-                    предмет</span></div>
+            <div class="upg-slot" id="slotLeft" onclick="clearUpgradeSlot('left')">
+                <span style="color:var(--text-gray); font-size: 12px;">Отдаем</span>
+            </div>
+
             <div class="upg-center">
                 <div class="chance-circle-container">
                     <div class="chance-circle" id="chanceCircle"></div>
@@ -449,43 +562,30 @@
                     </div>
                     <div class="chance-inner" id="chanceText">0%</div>
                 </div>
-                <button class="btn btn-yellow" style="padding: 8px; font-size: 12px; margin-top:0;"
+                <button class="btn btn-yellow" style="padding: 10px; font-size: 14px; margin-top:0;"
                     onclick="doUpgrade()">АПГРЕЙД</button>
             </div>
-            <div class="upg-slot" id="slotRight" onclick="clearUpgradeSlot('right')"><span
-                    style="color:gray;">Цель</span></div>
+
+            <div class="upg-slot" id="slotRight" onclick="clearUpgradeSlot('right')">
+                <span style="color:var(--text-gray); font-size: 12px;">Получаем</span>
+            </div>
         </div>
-        <div id="upgradeResult" style="text-align: center; font-weight: bold; margin-bottom: 10px; font-size: 18px;">
+
+        <div id="upgradeResult"
+            style="text-align: center; font-weight: bold; margin-bottom: 15px; font-size: 20px; min-height: 25px;">
         </div>
+
         <div class="upg-lists">
             <div class="upg-list-box">
-                <div style="font-size:12px; color:gray; text-align:center;">Мой инвентарь</div>
+                <div style="font-size:12px; color:var(--text-gray); text-align:center; margin-bottom: 8px;">Инвентарь
+                </div>
                 <div id="upgInvList"></div>
             </div>
             <div class="upg-list-box">
-                <div style="font-size:12px; color:gray; text-align:center;">Цели</div>
+                <div style="font-size:12px; color:var(--text-gray); text-align:center; margin-bottom: 8px;">Все скины
+                </div>
                 <div id="upgTargetList"></div>
             </div>
-        </div>
-    </div>
-
-    <div id="profile" class="section hidden">
-        <div class="case-contents" style="margin-top: 0;">
-            <h3 style="margin-top:0;">Настройки и Вывод</h3>
-            <label style="font-size: 12px; color: gray;">Steam Trade URL:</label>
-            <input type="text" id="tradeUrlInput" class="input-field"
-                placeholder="https://steamcommunity.com/tradeoffer/new/...">
-            <button class="btn btn-green" onclick="saveTradeUrl()">Сохранить ссылку</button>
-        </div>
-
-        <div class="case-contents">
-            <h3 style="margin-top:0;">Пополнение ★</h3>
-            <p style="font-size: 12px; color: gray;">Покупка звезд за Telegram Stars (приложение закроется для создания
-                счета ботом):</p>
-            <button class="btn" style="background:#28a745;" onclick="buyStars(1000)">Купить 1000 ★ (100 TG
-                Stars)</button>
-            <button class="btn" style="background:#28a745;" onclick="buyStars(5000)">Купить 5000 ★ (450 TG
-                Stars)</button>
         </div>
     </div>
 
@@ -493,6 +593,7 @@
         <button id="navCases" onclick="showSection('cases', this)" class="active"><span>📦</span>Кейсы</button>
         <button onclick="showSection('inventory', this)"><span>🎒</span>Инвентарь</button>
         <button onclick="showSection('upgrades', this)"><span>⬆️</span>Апгрейд</button>
+        <button onclick="showSection('tasks', this)"><span>📋</span>Задания</button>
         <button onclick="showSection('profile', this)"><span>👤</span>Профиль</button>
     </div>
 
@@ -502,67 +603,111 @@
 
         const imgURL = "https://steamcommunity-a.akamaihd.net/economy/image/";
 
-        // Увеличенная база и баланс шансов
+        // БОЛЬШАЯ БАЗА ПРЕДМЕТОВ С НАСТРОЕННЫМИ ШАНСАМИ
         const dbItems = {
-            eco: [ // Только ширп, окуп очень редкий
+            eco: [
                 { name: 'P250 | Песчаная дюна', rarity: 'common', price: 10, weight: 60, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpopujwezhhwAMzcTFR09C_k4mClvnmJb_VlT1RsMhwj-zDo9j0hAawq0E9Z2r1JdTGdwU7ZwzRqVC5lrm60JO5vc7Pmns3pGB8stMvYt7U' },
-                { name: 'Nova | Орех', rarity: 'common', price: 30, weight: 30, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou7umeldf0Ob3fDxBvYyJi46Hk_7nI7DflWhR7MZ1iurEpdSn1AbkrRRoY2GldoScd1RraFiE_FLtxO-6jZPq6ZufzSA1s3Qm-z-DyP9rK2A' },
-                { name: 'Glock-18 | Горелка', rarity: 'common', price: 80, weight: 8, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposbaqKAxf0v73dDBH_t26q4S0m_7zO6_ck29Y_cg_2-yQpYmi0FHg-kQ9Yjv0JoGddlU2MA3Z8lLqyOnpgZDt6Z3JzyAwuSIj5HuJlwv330_5p-Rviw' },
-                { name: 'M4A4 | Магний', rarity: 'rare', price: 250, weight: 2, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkNqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ' }
+                { name: 'Nova | Орех', rarity: 'common', price: 30, weight: 25, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou7umeldf0Ob3fDxBvYyJi46Hk_7nI7DflWhR7MZ1iurEpdSn1AbkrRRoY2GldoScd1RraFiE_FLtxO-6jZPq6ZufzSA1s3Qm-z-DyP9rK2A' },
+                { name: 'Glock-18 | Горелка', rarity: 'common', price: 80, weight: 10, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposbaqKAxf0v73dDBH_t26q4S0m_7zO6_ck29Y_cg_2-yQpYmi0FHg-kQ9Yjv0JoGddlU2MA3Z8lLqyOnpgZDt6Z3JzyAwuSIj5HuJlwv330_5p-Rviw' },
+                { name: 'M4A4 | Магний', rarity: 'rare', price: 250, weight: 4, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkNqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ' },
+                { name: 'AK-47 | Красная линия', rarity: 'epic', price: 1200, weight: 1, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5lpKKqPrxN7LEmyVQ7MEpiLuX8I-k3QXsqRVlZ2GlIYPBdwc4YlvR8gTqxebpg8W_vM-fmHdgvCUn4CndmQv3308mIukPGA' }
             ],
             normal: [
-                { name: 'M4A4 | Магний', rarity: 'common', price: 250, weight: 50, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkNqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ' },
-                { name: 'USP-S | Сайрекс', rarity: 'rare', price: 800, weight: 30, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo6m1FBRp3_bGcTpN0924q4iOluHtfevVxzhTscYpjOqV8NmkigC280o6MWyicNXHdAQ2ZV3T8gToyOzrgp7ovpjMySNkpGB8snP8q3sA' },
+                { name: 'M4A4 | Магний', rarity: 'common', price: 250, weight: 55, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-M6_hIW0mOX1N-Luhm5V18N0hf-WpInwi0GxqkNqMDivcY6XcAM3M12CqVm-xLjrhJG9ucicyHFkvCMq-z-DyK9O_-kQ' },
+                { name: 'USP-S | Сайрекс', rarity: 'rare', price: 800, weight: 25, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo6m1FBRp3_bGcTpN0924q4iOluHtfevVxzhTscYpjOqV8NmkigC280o6MWyicNXHdAQ2ZV3T8gToyOzrgp7ovpjMySNkpGB8snP8q3sA' },
                 { name: 'AK-47 | Красная линия', rarity: 'epic', price: 1200, weight: 15, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5lpKKqPrxN7LEmyVQ7MEpiLuX8I-k3QXsqRVlZ2GlIYPBdwc4YlvR8gTqxebpg8W_vM-fmHdgvCUn4CndmQv3308mIukPGA' },
-                { name: 'AWP | Скоростной зверь', rarity: 'legendary', price: 4000, weight: 5, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FABz7PLfYQJG6d2inL-GkvP9Jrafw2lU6ccp0rqX8d2zjQbs_0RlZmmgd4-TIVA9NV2ErFW2we_pgcC_vp-bwXVg6CE8pSGKGk2Hqg' }
+                { name: 'AWP | Скоростной зверь', rarity: 'legendary', price: 4000, weight: 4, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FABz7PLfYQJG6d2inL-GkvP9Jrafw2lU6ccp0rqX8d2zjQbs_0RlZmmgd4-TIVA9NV2ErFW2we_pgcC_vp-bwXVg6CE8pSGKGk2Hqg' },
+                { name: 'AWP | Азимов', rarity: 'legendary', price: 7000, weight: 1, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2D4G65xz0-2ZpNmti1fl_xVva1qwclc8cApvMInmDQa2yO_m0ZTtutjMmHVg7HYr-z-DyI4jCxsS' }
             ],
             premium: [
-                { name: 'AK-47 | Красная линия', rarity: 'common', price: 1200, weight: 45, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5lpKKqPrxN7LEmyVQ7MEpiLuX8I-k3QXsqRVlZ2GlIYPBdwc4YlvR8gTqxebpg8W_vM-fmHdgvCUn4CndmQv3308mIukPGA' },
-                { name: 'M4A1-S | Огонь Чантико', rarity: 'rare', price: 3000, weight: 35, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjDFW-N-lq4qDk_bkJbiGwlVW7cpPjqSVoNii2gXn8kVpYTjwJYaedgRoaFCB_le8kOjug8TquM_Lm3tluXUg-z-DyP2hP_XQ' },
-                { name: 'AWP | Азимов', rarity: 'epic', price: 7000, weight: 15, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2D4G65xz0-2ZpNmti1fl_xVva1qwclc8cApvMInmDQa2yO_m0ZTtutjMmHVg7HYr-z-DyI4jCxsS' },
-                { name: 'M4A4 | Вой', rarity: 'legendary', price: 20000, weight: 5, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhz2v_Nfz5H_uO1gb-Gw_alIITfn2xZ_MhwmjzF-pj8jEWx80c_YWH1cI_BJw8_YgqEqAK_yOjrgpfpuMzPnHNksnEl4Svemgv3308xNf-lCw' }
+                { name: 'USP-S | Сайрекс', rarity: 'common', price: 800, weight: 40, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo6m1FBRp3_bGcTpN0924q4iOluHtfevVxzhTscYpjOqV8NmkigC280o6MWyicNXHdAQ2ZV3T8gToyOzrgp7ovpjMySNkpGB8snP8q3sA' },
+                { name: 'AK-47 | Красная линия', rarity: 'common', price: 1200, weight: 35, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhjxszJemkV09-5lpKKqPrxN7LEmyVQ7MEpiLuX8I-k3QXsqRVlZ2GlIYPBdwc4YlvR8gTqxebpg8W_vM-fmHdgvCUn4CndmQv3308mIukPGA' },
+                { name: 'AWP | Скоростной зверь', rarity: 'rare', price: 4000, weight: 15, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FABz7PLfYQJG6d2inL-GkvP9Jrafw2lU6ccp0rqX8d2zjQbs_0RlZmmgd4-TIVA9NV2ErFW2we_pgcC_vp-bwXVg6CE8pSGKGk2Hqg' },
+                { name: 'AWP | Азимов', rarity: 'epic', price: 7000, weight: 8, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17PLfYQJD_9W7m5a0mvLwOq7c2D4G65xz0-2ZpNmti1fl_xVva1qwclc8cApvMInmDQa2yO_m0ZTtutjMmHVg7HYr-z-DyI4jCxsS' },
+                { name: 'M4A4 | Вой', rarity: 'legendary', price: 20000, weight: 2, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhz2v_Nfz5H_uO1gb-Gw_alIITfn2xZ_MhwmjzF-pj8jEWx80c_YWH1cI_BJw8_YgqEqAK_yOjrgpfpuMzPnHNksnEl4Svemgv3308xNf-lCw' }
             ],
             knife: [
-                { name: 'Наваха | Волны', rarity: 'rare', price: 8000, weight: 60, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0OP3fThQ5dKlhZ-bgvx7m_zDlzxSuZUniOqS99SgjVSw-Utoaz2lcdecIVRvaVmE_lDswuq5hZDv7cidziBmsicntH_emBC3gUtEaLMpDxaY' },
-                { name: 'Скелетный нож | Градиент', rarity: 'epic', price: 25000, weight: 30, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfwPjNfThW49KJh5C0k_b5MqjSg3husZ1i_LHCp9ihiQXk-ENkNW6hcNmXdFI2Zw7WrgO3xbju0MTtvp-YziRo63Qm43iDmxC_hwYMMLIZnnsgVA' },
-                { name: 'Керамбит | Волны', rarity: 'legendary', price: 40000, weight: 8, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2OTEcgFO_c-1mY-DkvbiM7_Sl29U18l4jeHVu43zjAex_UQ9az_xd4SVI1c3aFrQrFS8le2-gMK97c_InHpqsykgtH6OlhC-1B0eb7NshqWACQLJDgY1U1w' },
-                { name: 'Спортивные перчатки | Порок', rarity: 'legendary', price: 80000, weight: 2, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfwPjNfThW49KJnJm0kfjmILDSh2pC-sRzj-HPpoqtjVGyqkBkYzindoecegRrZljZ_ATvxee7hMfqtJrVnyb4nCRgslnO' }
+                { name: 'Наваха | Пыльник', rarity: 'rare', price: 6000, weight: 50, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0OP3fTgQ5dKyq4iOqPv9NLPF2DwEuZdw2LyTpNyh3QGxq0JpM22mddKRdg4-aA3T_Fe5xr-5gZ_quZqcmHM2vycg4H2ImB210wYMMLInH7rVQQ' },
+                { name: 'Наваха | Волны', rarity: 'epic', price: 8000, weight: 30, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf0OP3fThQ5dKlhZ-bgvx7m_zDlzxSuZUniOqS99SgjVSw-Utoaz2lcdecIVRvaVmE_lDswuq5hZDv7cidziBmsicntH_emBC3gUtEaLMpDxaY' },
+                { name: 'Скелетный нож | Градиент', rarity: 'legendary', price: 25000, weight: 15, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfwPjNfThW49KJh5C0k_b5MqjSg3husZ1i_LHCp9ihiQXk-ENkNW6hcNmXdFI2Zw7WrgO3xbju0MTtvp-YziRo63Qm43iDmxC_hwYMMLIZnnsgVA' },
+                { name: 'Керамбит | Волны', rarity: 'gold', price: 40000, weight: 4, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJf2OTEcgFO_c-1mY-DkvbiM7_Sl29U18l4jeHVu43zjAex_UQ9az_xd4SVI1c3aFrQrFS8le2-gMK97c_InHpqsykgtH6OlhC-1B0eb7NshqWACQLJDgY1U1w' },
+                { name: 'Спорт. перчатки | Порок', rarity: 'gold', price: 80000, weight: 1, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpovbSsLQJfwPjNfThW49KJnJm0kfjmILDSh2pC-sRzj-HPpoqtjVGyqkBkYzindoecegRrZljZ_ATvxee7hMfqtJrVnyb4nCRgslnO' }
             ],
-            upgradeTargets: [ // Только для апгрейда
-                { name: 'AWP | Гунгнир', rarity: 'legendary', price: 150000, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FBRw7P7NYjV9-N24q42Ok_7hPvXQhW4A7cQh2e3Do9qmiQWyqBdpYmnxctDDIVA3aVnTrFLskrvu0ZLuupzP1zI97dM8t00' }
+            upgradeTargets: [
+                { name: 'AWP | Гунгнир', rarity: 'gold', price: 150000, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FBRw7P7NYjV9-N24q42Ok_7hPvXQhW4A7cQh2e3Do9qmiQWyqBdpYmnxctDDIVA3aVnTrFLskrvu0ZLuupzP1zI97dM8t00' },
+                { name: 'AWP | История о драконе', rarity: 'gold', price: 250000, img: imgURL + '-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot621FAR17P7NdTRH-t26q4SZlvD7IITdn2xZ_Ishi-TOyoD8j1yg-RE_Y2-gdYTHdlRvMFiE-APqxOu805Hu6pzByCAx7CMg-z-DyG2q8QvP' }
             ]
         };
 
+        // ИНИЦИАЛИЗАЦИЯ ИГРОКА И СОХРАНЕНИЙ
         const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : 'guest';
 
-        // Исправленная система загрузки баланса
-        let balance = localStorage.getItem(`balance_${userId}`);
-        if (balance === null) {
-            balance = 5000; // Даем 5000 только новым игрокам!
-        } else {
-            balance = parseInt(balance);
+        let balance = parseInt(localStorage.getItem(`balance_${userId}`));
+        if (isNaN(balance)) {
+            balance = 5000; // Стартовый баланс для новых юзеров
         }
 
         let inventory = JSON.parse(localStorage.getItem(`inventory_${userId}`)) || [];
         let tradeUrl = localStorage.getItem(`tradeUrl_${userId}`) || '';
+        let taskDone = localStorage.getItem(`task_sub_${userId}`) === 'true';
 
+        // Восстанавливаем данные в интерфейс
         document.getElementById('tradeUrlInput').value = tradeUrl;
+        if (taskDone) {
+            document.getElementById('subBtn').disabled = true;
+            document.getElementById('subBtn').innerText = "✅ Задание выполнено";
+        }
 
         let currentCase = '';
         let currentPrice = 0;
         let isSpinning = false;
 
+        // ФУНКЦИЯ СОХРАНЕНИЯ ДАННЫХ
         function saveUserData() {
             localStorage.setItem(`balance_${userId}`, balance);
             localStorage.setItem(`inventory_${userId}`, JSON.stringify(inventory));
             localStorage.setItem(`tradeUrl_${userId}`, tradeUrl);
-            updateUI();
+            document.getElementById('stars').innerText = balance;
         }
 
-        function updateUI() {
-            document.getElementById('stars').innerText = balance;
-            renderInventory();
-            renderUpgradeLists();
+        // Запускаем сохранение и обновление UI при старте
+        saveUserData();
+
+        // --- ЛОГИКА МЕНЮ ПРЕДОСМОТРА КЕЙСОВ ---
+        function openPreview(caseType, price, title) {
+            currentCase = caseType;
+            currentPrice = price;
+
+            // Прячем все секции
+            document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
+
+            // Заполняем данные
+            document.getElementById('previewTitle').innerText = title;
+            document.getElementById('startSpinBtn').innerText = `КРУТИТЬ ЗА ★ ${price}`;
+
+            const list = document.getElementById('previewItemsList');
+            list.innerHTML = '';
+            const items = dbItems[caseType];
+
+            // Считаем общий вес для процентов
+            const totalW = items.reduce((s, i) => s + i.weight, 0);
+
+            // Сортируем от самых редких к частым
+            items.sort((a, b) => a.weight - b.weight).forEach(item => {
+                const chance = ((item.weight / totalW) * 100).toFixed(1);
+                const div = document.createElement('div');
+                div.className = `content-item ${item.rarity}`;
+                div.innerHTML = `
+                    <div style="display:flex; align-items:center;">
+                        <img src="${item.img}">
+                        <span>${item.name} <br> <span style="color:var(--upgrade-yellow); font-weight: bold;">★${item.price}</span></span>
+                    </div>
+                    <div style="font-weight:bold; font-size: 14px;">${chance}%</div>
+                `;
+                list.appendChild(div);
+            });
+
+            document.getElementById('previewArea').classList.remove('hidden');
         }
 
         // --- ЛОГИКА РУЛЕТКИ ---
@@ -576,106 +721,98 @@
             }
         }
 
-        function renderCaseContents(caseType) {
-            const list = document.getElementById('caseItemsList');
-            list.innerHTML = '';
-            const caseItems = dbItems[caseType];
-            const totalWeight = caseItems.reduce((sum, item) => sum + item.weight, 0);
-
-            caseItems.sort((a, b) => b.weight - a.weight).forEach(item => {
-                const chance = ((item.weight / totalWeight) * 100).toFixed(1);
-                const div = document.createElement('div');
-                div.className = `content-item ${item.rarity}`;
-                div.innerHTML = `
-                    <div style="display:flex; align-items:center;">
-                        <img src="${item.img}">
-                        <span>${item.name} <br> <span style="color:var(--upgrade-yellow)">★${item.price}</span></span>
-                    </div>
-                    <div style="font-weight:bold;">${chance}%</div>
-                `;
-                list.appendChild(div);
-            });
-        }
-
-        function openRouletteScreen(caseType, price) {
-            currentCase = caseType; currentPrice = price;
-            document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
-            document.getElementById('rouletteArea').classList.remove('hidden');
-            renderCaseContents(caseType);
-            startRoulette();
-        }
-
         function startRoulette() {
             if (isSpinning) return;
-            if (balance < currentPrice) { tg.showAlert('❌ Недостаточно звезд!'); return; }
+            if (balance < currentPrice) {
+                tg.showAlert('❌ Недостаточно звезд! Перейди в Задания или Профиль для пополнения.');
+                return;
+            }
 
-            balance -= currentPrice; saveUserData(); isSpinning = true;
+            // Списываем баланс
+            balance -= currentPrice;
+            saveUserData();
+            isSpinning = true;
 
-            const rouletteLine = document.getElementById('rouletteLine');
-            rouletteLine.style.transition = 'none';
-            rouletteLine.style.transform = 'translateX(0px)';
-            rouletteLine.innerHTML = '';
+            // Настраиваем видимость окон
+            document.getElementById('previewArea').classList.add('hidden');
+            document.getElementById('resultArea').classList.add('hidden');
+            const rouletteArea = document.getElementById('rouletteArea');
+            rouletteArea.classList.remove('hidden');
 
+            const line = document.getElementById('rouletteLine');
+            line.style.transition = 'none';
+            line.style.transform = 'translateX(0px)';
+            line.innerHTML = '';
+
+            // Генерируем 50 предметов для визуальной прокрутки
             const visualItems = [];
             for (let i = 0; i < 50; i++) visualItems.push(getRandomItem(currentCase));
+
+            // Выбираем победителя (он будет 40-м элементом)
             const winningItem = visualItems[40];
 
             visualItems.forEach(item => {
                 const div = document.createElement('div');
                 div.className = `roulette-item ${item.rarity}`;
-                div.innerHTML = `<img src="${item.img}"><div style="font-size:10px;text-align:center;">${item.name.split('|')[0]}</div>`;
-                rouletteLine.appendChild(div);
+                div.innerHTML = `
+                    <img src="${item.img}">
+                    <div style="font-size:10px;text-align:center;">${item.name.split('|')[0]}</div>
+                `;
+                line.appendChild(div);
             });
 
+            // Запускаем анимацию
             setTimeout(() => {
                 const offset = (40 * 110) - (window.innerWidth / 2) + 55;
-                rouletteLine.style.transition = 'transform 4s cubic-bezier(0.1, 0.8, 0.2, 1)';
-                rouletteLine.style.transform = `translateX(-${offset}px)`;
+                line.style.transition = 'transform 4s cubic-bezier(0.1, 0.8, 0.2, 1)';
+                line.style.transform = `translateX(-${offset}px)`;
             }, 50);
 
+            // Обработка окончания рулетки
             setTimeout(() => {
-                inventory.push(winningItem); saveUserData();
+                inventory.push(winningItem);
+                saveUserData();
                 tg.HapticFeedback.notificationOccurred('success');
-                showCaseResult(winningItem);
+
+                rouletteArea.classList.add('hidden');
+                const resArea = document.getElementById('resultArea');
+                resArea.classList.remove('hidden');
+
+                document.getElementById('winName').innerText = winningItem.name;
+                document.getElementById('winName').className = winningItem.rarity;
+                document.getElementById('winImg').src = winningItem.img;
+                document.getElementById('winPrice').innerText = winningItem.price;
+
+                isSpinning = false;
             }, 4050);
         }
 
-        function showCaseResult(item) {
-            document.getElementById('rouletteArea').classList.add('hidden');
-            const resArea = document.getElementById('resultArea');
-            resArea.classList.remove('hidden');
-            document.getElementById('winName').innerText = item.name;
-            document.getElementById('winName').className = item.rarity;
-            document.getElementById('winImg').src = item.img;
-            document.getElementById('winPrice').innerText = item.price;
-            isSpinning = false;
-        }
-
-        function reopenCurrentCase() {
-            document.getElementById('resultArea').classList.add('hidden');
-            document.getElementById('rouletteArea').classList.remove('hidden');
-            startRoulette();
-        }
-
-        // --- ИНВЕНТАРЬ ---
+        // --- ЛОГИКА ИНВЕНТАРЯ ---
         function renderInventory() {
             const grid = document.getElementById('invGrid');
             grid.innerHTML = '';
+
             if (inventory.length === 0) {
-                grid.innerHTML = '<p style="grid-column: span 2; color: gray; text-align:center;">Пусто</p>'; return;
+                grid.innerHTML = '<p style="grid-column: span 2; text-align:center; color: var(--text-gray);">Инвентарь пуст. Открой пару кейсов!</p>';
+                return;
             }
-            inventory.forEach((item, index) => {
+
+            // Сортировка по цене (от дорогих к дешевым)
+            const sortedInventory = [...inventory].sort((a, b) => b.price - a.price);
+
+            sortedInventory.forEach((item, displayIndex) => {
+                // Ищем реальный индекс в оригинальном массиве для продажи/вывода
+                const realIndex = inventory.findIndex(invItem => invItem === item);
+
                 const div = document.createElement('div');
                 div.className = `card ${item.rarity}`;
                 div.innerHTML = `
-                    <div>
-                        <img src="${item.img}">
-                        <div style="font-size:12px; margin-bottom:5px; height: 30px;">${item.name}</div>
-                        <div style="color:var(--upgrade-yellow); font-weight:bold; margin-bottom: 5px;">★${item.price}</div>
-                    </div>
+                    <img src="${item.img}">
+                    <div style="font-size:12px; margin-bottom:5px; height: 32px; overflow:hidden;">${item.name}</div>
+                    <div style="color:var(--upgrade-yellow); font-weight:bold; margin-bottom: 8px; font-size: 14px;">★${item.price}</div>
                     <div style="display:flex; gap:5px;">
-                        <button class="btn btn-green" style="font-size:10px; padding:8px;" onclick="sellItem(${index})">Продать</button>
-                        <button class="btn" style="font-size:10px; padding:8px;" onclick="withdrawItem(${index})">Вывести</button>
+                        <button class="btn btn-green" style="font-size:10px; padding:8px; margin:0;" onclick="sellItem(${realIndex})">Продать</button>
+                        <button class="btn" style="font-size:10px; padding:8px; margin:0;" onclick="withdrawItem(${realIndex})">Вывести</button>
                     </div>`;
                 grid.appendChild(div);
             });
@@ -685,49 +822,72 @@
             balance += inventory[index].price;
             inventory.splice(index, 1);
             saveUserData();
+            renderInventory(); // Перерисовываем
             tg.HapticFeedback.notificationOccurred('success');
         }
 
-        // --- ПРОФИЛЬ И ВЫВОД ---
         function saveTradeUrl() {
             tradeUrl = document.getElementById('tradeUrlInput').value;
             saveUserData();
-            tg.showAlert('Trade URL сохранен!');
+            tg.showAlert('Trade URL успешно сохранен!');
         }
 
         function withdrawItem(index) {
-            if (!tradeUrl || !tradeUrl.includes('steamcommunity.com')) {
-                tg.showAlert('Сначала укажите правильный Steam Trade URL в профиле!');
+            if (!tradeUrl || (!tradeUrl.includes('steamcommunity.com') && !tradeUrl.includes('steam://'))) {
+                tg.showAlert('Укажите правильный Steam Trade URL в разделе "Профиль"!');
                 return;
             }
             const item = inventory[index];
 
-            // Отправляем данные боту (закроет приложение)
+            // Отправка данных боту Python (работает только если открывать через ReplyKeyboard)
             const data = { action: 'withdraw', item_name: item.name, trade_url: tradeUrl };
             tg.sendData(JSON.stringify(data));
 
-            inventory.splice(index, 1); // Списываем предмет
+            // Удаляем предмет, так как он "ушел" на вывод
+            inventory.splice(index, 1);
             saveUserData();
         }
 
-        function buyStars(amount) {
-            // Отправляем данные боту для создания счета
-            const data = { action: 'buy_stars', amount: amount };
+        function buyStars(starsAmount, tgStarsPrice) {
+            const data = { action: 'buy_stars', amount: starsAmount, price: tgStarsPrice };
             tg.sendData(JSON.stringify(data));
         }
 
-        // --- АПГРЕЙД С ВРАЩАЮЩИМСЯ КУРСОРМ ---
-        let upgInputItem = null, upgInputIndex = -1, upgTargetItem = null, upgradeChance = 0, isUpgrading = false;
+        // --- ЛОГИКА ЗАДАНИЙ (Подписка) ---
+        function checkSubscription() {
+            tg.openTelegramLink('https://t.me/speedytge');
+
+            // Имитация задержки проверки подписки
+            setTimeout(() => {
+                balance += 500;
+                localStorage.setItem(`task_sub_${userId}`, 'true');
+                saveUserData();
+                tg.showAlert('✅ 500 ★ успешно начислены за подписку!');
+
+                const btn = document.getElementById('subBtn');
+                btn.disabled = true;
+                btn.innerText = "✅ Задание выполнено";
+            }, 4000);
+        }
+
+        // --- ЛОГИКА АПГРЕЙДА ---
+        let upgInputItem = null;
+        let upgInputIndex = -1;
+        let upgTargetItem = null;
+        let upgradeChance = 0;
+        let isUpgrading = false;
 
         function selectForUpgrade(type, item, index) {
             document.getElementById('upgradeResult').innerText = '';
+
             if (type === 'input') {
-                upgInputItem = item; upgInputIndex = index;
-                document.getElementById('slotLeft').innerHTML = `<img src="${item.img}"><div>${item.name.split('|')[0]}</div>`;
+                upgInputItem = item;
+                upgInputIndex = index;
+                document.getElementById('slotLeft').innerHTML = `<img src="${item.img}"><div style="margin-top:5px;">${item.name.split('|')[0]}</div>`;
                 document.getElementById('slotLeft').className = `upg-slot ${item.rarity}`;
             } else {
                 upgTargetItem = item;
-                document.getElementById('slotRight').innerHTML = `<img src="${item.img}"><div>${item.name.split('|')[0]}</div>`;
+                document.getElementById('slotRight').innerHTML = `<img src="${item.img}"><div style="margin-top:5px;">${item.name.split('|')[0]}</div>`;
                 document.getElementById('slotRight').className = `upg-slot ${item.rarity}`;
             }
             calculateChance();
@@ -735,12 +895,13 @@
 
         function clearUpgradeSlot(side) {
             if (side === 'left') {
-                upgInputItem = null; upgInputIndex = -1;
-                document.getElementById('slotLeft').innerHTML = '<span style="color:gray;">Твой предмет</span>';
+                upgInputItem = null;
+                upgInputIndex = -1;
+                document.getElementById('slotLeft').innerHTML = '<span style="color:var(--text-gray); font-size:12px;">Отдаем</span>';
                 document.getElementById('slotLeft').className = 'upg-slot';
             } else {
                 upgTargetItem = null;
-                document.getElementById('slotRight').innerHTML = '<span style="color:gray;">Цель</span>';
+                document.getElementById('slotRight').innerHTML = '<span style="color:var(--text-gray); font-size:12px;">Получаем</span>';
                 document.getElementById('slotRight').className = 'upg-slot';
             }
             calculateChance();
@@ -755,12 +916,16 @@
             pointer.style.transform = 'rotate(0deg)'; // Сброс стрелки вверх
 
             if (!upgInputItem || !upgTargetItem) {
-                upgradeChance = 0; chanceText.innerText = '0%';
+                upgradeChance = 0;
+                chanceText.innerText = '0%';
                 circle.style.background = 'conic-gradient(var(--upgrade-yellow) 0%, #333 0%)';
                 return;
             }
 
+            // Формула шанса: Цена твоего / Цена желаемого
             upgradeChance = (upgInputItem.price / upgTargetItem.price) * 100;
+
+            // Если твой предмет дороже, шанс 100% (но так делать невыгодно для юзера)
             if (upgradeChance > 100) upgradeChance = 100;
 
             chanceText.innerText = `${upgradeChance.toFixed(1)}%`;
@@ -769,80 +934,137 @@
 
         function doUpgrade() {
             if (isUpgrading) return;
-            if (!upgInputItem || !upgTargetItem) { tg.showAlert('Выбери оба предмета!'); return; }
+            if (!upgInputItem || !upgTargetItem) {
+                tg.showAlert('Для начала выбери оба предмета!');
+                return;
+            }
 
             isUpgrading = true;
             const resText = document.getElementById('upgradeResult');
-            resText.innerText = 'Крутим...'; resText.style.color = 'white';
+            resText.innerText = 'КРУТИМ...';
+            resText.style.color = 'white';
 
-            inventory.splice(upgInputIndex, 1); saveUserData(); // Списываем
+            // Списываем предмет, который отдаем
+            inventory.splice(upgInputIndex, 1);
+            saveUserData();
 
             const pointer = document.getElementById('pointerContainer');
+
+            // Бросаем кубик (от 0 до 100)
             const roll = Math.random() * 100;
             const isWin = roll <= upgradeChance;
 
-            const chanceDeg = upgradeChance * 3.6;
+            const chanceDeg = upgradeChance * 3.6; // Переводим шанс в градусы
             let targetDeg = 0;
 
-            // Желтая зона находится от 0 до chanceDeg.
             if (isWin) {
-                targetDeg = Math.random() * (chanceDeg - 2) + 1; // в желтой зоне
+                // Целимся в желтую зону
+                targetDeg = Math.random() * (chanceDeg - 2) + 1;
             } else {
-                targetDeg = chanceDeg + Math.random() * (360 - chanceDeg - 2) + 1; // в серой зоне
+                // Целимся в серую зону (от конца желтой зоны до 360)
+                targetDeg = chanceDeg + Math.random() * (360 - chanceDeg - 2) + 1;
             }
 
-            // Вращаем саму СТРЕЛКУ на 4 оборота + градус
-            const finalRotation = (360 * 4) + targetDeg;
-            pointer.style.transition = 'transform 3s cubic-bezier(0.1, 0.8, 0.2, 1)';
+            // 5 полных оборотов + итоговый градус
+            const finalRotation = (360 * 5) + targetDeg;
+
+            pointer.style.transition = 'transform 3.5s cubic-bezier(0.1, 0.8, 0.2, 1)';
             pointer.style.transform = `rotate(${finalRotation}deg)`;
 
+            // Завершение анимации
             setTimeout(() => {
                 if (isWin) {
                     inventory.push(upgTargetItem);
                     resText.style.color = '#10b981';
-                    resText.innerText = `ПОЗДРАВЛЯЕМ! 🎉`;
+                    resText.innerText = `УСПЕШНО! 🎉`;
                     tg.HapticFeedback.notificationOccurred('success');
                 } else {
                     resText.style.color = '#ef4444';
                     resText.innerText = `СГОРЕЛ... 😢`;
                     tg.HapticFeedback.notificationOccurred('error');
                 }
-                saveUserData(); clearUpgradeSlot('left'); isUpgrading = false;
-            }, 3050);
+
+                saveUserData();
+                clearUpgradeSlot('left');
+
+                // Обновляем списки после изменения инвентаря
+                renderUpgradeLists();
+
+                isUpgrading = false;
+            }, 3550);
         }
 
         function renderUpgradeLists() {
-            const invList = document.getElementById('upgInvList'); invList.innerHTML = '';
+            const invList = document.getElementById('upgInvList');
+            invList.innerHTML = '';
+
+            // Список твоих предметов
             inventory.forEach((item, index) => {
-                const div = document.createElement('div'); div.className = `upg-item ${item.rarity}`;
-                div.innerHTML = `<img src="${item.img}" style="width:30px;height:20px;object-fit:contain;"> <span style="flex-grow:1; margin-left:5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name.split('|')[0]}</span>`;
-                div.onclick = () => { if (!isUpgrading) selectForUpgrade('input', item, index); }; invList.appendChild(div);
+                const div = document.createElement('div');
+                div.className = `upg-item ${item.rarity}`;
+                div.innerHTML = `
+                    <img src="${item.img}" style="width:30px;height:20px;object-fit:contain;"> 
+                    <span style="flex-grow:1; margin-left:8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name.split('|')[0]}</span>
+                    <span style="color:var(--upgrade-yellow); font-weight:bold;">★${item.price}</span>
+                `;
+                div.onclick = () => { if (!isUpgrading) selectForUpgrade('input', item, index); };
+                invList.appendChild(div);
             });
 
-            const targetList = document.getElementById('upgTargetList'); targetList.innerHTML = '';
-            const allTargets = [...dbItems.normal, ...dbItems.premium, ...dbItems.knife, ...dbItems.upgradeTargets].sort((a, b) => a.price - b.price);
-            allTargets.forEach(item => {
-                const div = document.createElement('div'); div.className = `upg-item ${item.rarity}`;
-                div.innerHTML = `<img src="${item.img}" style="width:30px;height:20px;object-fit:contain;"> <span style="flex-grow:1; margin-left:5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name.split('|')[0]}</span>`;
-                div.onclick = () => { if (!isUpgrading) selectForUpgrade('target', item, 0); }; targetList.appendChild(div);
+            // Список всех возможных целей
+            const targetList = document.getElementById('upgTargetList');
+            targetList.innerHTML = '';
+
+            // Собираем все предметы из всех кейсов
+            const allTargets = [
+                ...dbItems.normal,
+                ...dbItems.premium,
+                ...dbItems.knife,
+                ...dbItems.upgradeTargets
+            ].sort((a, b) => a.price - b.price); // Сортируем по возрастанию цены
+
+            // Удаляем дубликаты (чтобы один скин не повторялся)
+            const uniqueTargets = allTargets.filter((v, i, a) => a.findIndex(v2 => (v2.name === v.name)) === i);
+
+            uniqueTargets.forEach(item => {
+                const div = document.createElement('div');
+                div.className = `upg-item ${item.rarity}`;
+                div.innerHTML = `
+                    <img src="${item.img}" style="width:30px;height:20px;object-fit:contain;"> 
+                    <span style="flex-grow:1; margin-left:8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name.split('|')[0]}</span>
+                    <span style="color:var(--upgrade-yellow); font-weight:bold;">★${item.price}</span>
+                `;
+                div.onclick = () => { if (!isUpgrading) selectForUpgrade('target', item, 0); };
+                targetList.appendChild(div);
             });
         }
 
+        // --- ЛОГИКА НАВИГАЦИИ ПО РАЗДЕЛАМ ---
         function showSection(id, btnElement) {
+            // Прячем абсолютно все окна
             document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
-            document.getElementById('resultArea').classList.add('hidden');
+            document.getElementById('previewArea').classList.add('hidden');
             document.getElementById('rouletteArea').classList.add('hidden');
+            document.getElementById('resultArea').classList.add('hidden');
+
+            // Показываем запрошенный раздел
             document.getElementById(id).classList.remove('hidden');
+
+            // Управляем подсветкой кнопок меню
             document.querySelectorAll('.nav button').forEach(el => el.classList.remove('active'));
-            if (btnElement) btnElement.classList.add('active');
-            else {
+
+            if (btnElement) {
+                btnElement.classList.add('active');
+            } else {
                 document.querySelectorAll('.nav button').forEach(el => {
                     if (el.getAttribute('onclick').includes(id)) el.classList.add('active');
                 });
             }
-        }
 
-        updateUI();
+            // Рендерим нужные данные, если открыли вкладку
+            if (id === 'inventory') renderInventory();
+            if (id === 'upgrades') renderUpgradeLists();
+        }
     </script>
 </body>
 
