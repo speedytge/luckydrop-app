@@ -61,7 +61,7 @@
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
 
         .nav {
@@ -74,6 +74,7 @@
             background: #0f172a;
             padding: 15px 0;
             border-top: 1px solid #1e293b;
+            z-index: 100;
         }
 
         .nav button {
@@ -88,6 +89,77 @@
         .nav button.active {
             color: #3b82f6;
         }
+
+        /* Стили рулетки */
+        .roulette-container {
+            background: #0b1120;
+            border: 2px solid #3b82f6;
+            border-radius: 10px;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roulette-line {
+            display: flex;
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1);
+            will-change: transform;
+        }
+
+        .roulette-item {
+            min-width: 100px;
+            height: 100px;
+            background: #1e293b;
+            margin: 0 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-size: 12px;
+            border-bottom: 3px solid gray;
+        }
+
+        .roulette-item.common {
+            border-color: #94a3b8;
+        }
+
+        .roulette-item.rare {
+            border-color: #3b82f6;
+        }
+
+        .roulette-item.epic {
+            border-color: #a855f7;
+        }
+
+        .pointer {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: red;
+            z-index: 10;
+            box-shadow: 0 0 10px red;
+        }
+
+        /* Инвентарь */
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .inv-item {
+            background: #1e293b;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+            border-bottom: 3px solid gray;
+        }
     </style>
 </head>
 
@@ -97,99 +169,210 @@
         <div class="balance">★ <span id="stars">0</span></div>
     </div>
 
+    <div id="rouletteArea" class="hidden roulette-container">
+        <div class="pointer"></div>
+        <div class="roulette-line" id="rouletteLine"></div>
+        <div style="text-align: center; margin-top: 15px;">
+            <button class="btn" id="closeRouletteBtn" style="width: auto;" onclick="closeRoulette()"
+                disabled>Забрать</button>
+        </div>
+    </div>
+
     <div id="cases" class="section">
         <div class="card">
-            <h3>Кейс Эко</h3>
+            <h3>Кейс Эко (Только дешевые скины)</h3>
+            <p style="font-size: 12px; color: #94a3b8;">Содержимое: P250 Песчаная дюна, Nova Орех, AK-47 Африканская
+                сетка</p>
             <p>Цена: ★ 500</p>
-            <button class="btn" onclick="openCase(500)">Открыть кейс</button>
+            <button class="btn" onclick="startRoulette('eco', 500)">Открыть кейс</button>
         </div>
         <div class="card">
-            <h3>Золотой кейс</h3>
+            <h3>Кейс Обычный</h3>
+            <p style="font-size: 12px; color: #94a3b8;">Есть шанс на редкий дроп!</p>
             <p>Цена: ★ 1500</p>
-            <button class="btn" onclick="openCase(1500)">Открыть кейс</button>
+            <button class="btn" onclick="startRoulette('normal', 1500)">Открыть кейс</button>
         </div>
     </div>
 
-    <div id="tasks" class="section hidden">
-        <div class="card">
-            <h3>Задания для получения звезд</h3>
-            <p>Подпишись на наш ТГ-канал (+500 ★)</p>
-            <button class="btn" id="task-sub" onclick="completeTask()">Подписаться и получить</button>
-        </div>
+    <div id="inventory" class="section hidden">
+        <h3 style="text-align: center;">Твои скины</h3>
+        <div class="inventory-grid" id="invGrid"></div>
     </div>
 
-    <div id="refs" class="section hidden">
+    <div id="upgrades" class="section hidden">
         <div class="card">
-            <h3>Приглашай друзей</h3>
-            <p>Получай ★ 200 за каждого друга!</p>
-            <button class="btn" onclick="copyRefLink()">Скопировать ссылку</button>
+            <h3>Апгрейд</h3>
+            <p>Рискни дешевым скином, чтобы получить дорогой!</p>
+            <button class="btn" onclick="doUpgrade()">Попробовать апгрейд (Шанс 30%)</button>
+            <p id="upgradeResult" style="margin-top: 10px; font-weight: bold;"></p>
         </div>
     </div>
 
     <div class="nav">
         <button onclick="showSection('cases', this)" class="active">Кейсы</button>
-        <button onclick="showSection('tasks', this)">Задания</button>
-        <button onclick="showSection('refs', this)">Рефералы</button>
+        <button onclick="showSection('inventory', this)">Инвентарь</button>
+        <button onclick="showSection('upgrades', this)">Апгрейд</button>
     </div>
 
     <script>
-        // Инициализация Telegram Web App
         const tg = window.Telegram.WebApp;
-        tg.expand(); // Разворачиваем на весь экран
+        tg.expand();
 
-        // Баланс (в реальном проекте должен браться из базы данных!)
-        let balance = 0;
+        // Получаем ID пользователя для уникальных сохранений
+        const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : 'guest';
 
-        function updateBalance() {
-            document.getElementById('stars').innerText = balance;
+        // База данных скинов и вероятностей (чем выше weight, тем чаще падает)
+        const items = {
+            eco: [
+                { name: 'P250 | Песчаная дюна', rarity: 'common', price: 10, weight: 70 },
+                { name: 'Nova | Орех', rarity: 'common', price: 20, weight: 25 },
+                { name: 'AK-47 | Африканская сетка', rarity: 'rare', price: 150, weight: 5 }
+            ],
+            normal: [
+                { name: 'Glock-18 | Литье', rarity: 'common', price: 50, weight: 60 },
+                { name: 'M4A4 | Магний', rarity: 'rare', price: 300, weight: 30 },
+                { name: 'AWP | Азимов', rarity: 'epic', price: 5000, weight: 10 }
+            ]
+        };
+
+        // Загрузка данных юзера из LocalStorage
+        let balance = parseInt(localStorage.getItem(`balance_${userId}`)) || 5000; // 5000 для теста
+        let inventory = JSON.parse(localStorage.getItem(`inventory_${userId}`)) || [];
+
+        function saveUserData() {
+            localStorage.setItem(`balance_${userId}`, balance);
+            localStorage.setItem(`inventory_${userId}`, JSON.stringify(inventory));
+            updateUI();
         }
 
-        function openCase(price) {
-            if (balance >= price) {
-                balance -= price;
-                updateBalance();
-                tg.showAlert('🎉 Успех! Тебе выпал: AK-47 | Красная линия');
-            } else {
-                tg.showAlert('❌ Недостаточно звезд! Выполни задания в меню.');
+        function updateUI() {
+            document.getElementById('stars').innerText = balance;
+            renderInventory();
+        }
+
+        // Функция случайного выбора с учетом шансов (весов)
+        function getRandomItem(caseType) {
+            const caseItems = items[caseType];
+            const totalWeight = caseItems.reduce((sum, item) => sum + item.weight, 0);
+            let random = Math.random() * totalWeight;
+            for (let item of caseItems) {
+                if (random < item.weight) return item;
+                random -= item.weight;
             }
         }
 
-        function completeTask() {
-            // Открываем канал
-            tg.openTelegramLink('https://t.me/telegram'); // <-- Вставь ссылку на свой канал
+        let isSpinning = false;
 
-            // Имитация проверки подписки (в реальности это делает бот через API)
+        function startRoulette(caseType, price) {
+            if (isSpinning) return;
+            if (balance < price) {
+                tg.showAlert('❌ Недостаточно звезд!');
+                return;
+            }
+
+            balance -= price;
+            saveUserData();
+            isSpinning = true;
+
+            const rouletteArea = document.getElementById('rouletteArea');
+            const rouletteLine = document.getElementById('rouletteLine');
+            const closeBtn = document.getElementById('closeRouletteBtn');
+
+            rouletteArea.classList.remove('hidden');
+            rouletteLine.style.transition = 'none';
+            rouletteLine.style.transform = 'translateX(0px)';
+            rouletteLine.innerHTML = '';
+            closeBtn.disabled = true;
+
+            // Генерируем 50 случайных предметов для линии
+            const visualItems = [];
+            for (let i = 0; i < 50; i++) {
+                visualItems.push(getRandomItem(caseType));
+            }
+
+            // Выбираем победителя (он будет 40-м элементом)
+            const winningItem = visualItems[40];
+
+            // Рисуем элементы
+            visualItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = `roulette-item ${item.rarity}`;
+                div.innerHTML = `<div>📦</div><div>${item.name}</div>`;
+                rouletteLine.appendChild(div);
+            });
+
+            // Запускаем анимацию прокрутки
             setTimeout(() => {
-                balance += 500;
-                updateBalance();
-                const btn = document.getElementById('task-sub');
-                btn.innerText = '✅ Выполнено';
-                btn.disabled = true;
-                tg.showAlert('Начислено 500 звезд за подписку!');
-            }, 3000);
+                // Ширина одного элемента + маргины примерно 110px. Крутим до 40го элемента
+                const itemWidth = 110;
+                const offset = (40 * itemWidth) - (window.innerWidth / 2) + 55;
+
+                rouletteLine.style.transition = 'transform 4s cubic-bezier(0.1, 0.8, 0.2, 1)';
+                rouletteLine.style.transform = `translateX(-${offset}px)`;
+            }, 50);
+
+            // Окончание прокрутки
+            setTimeout(() => {
+                inventory.push(winningItem);
+                saveUserData();
+                closeBtn.disabled = false;
+                tg.HapticFeedback.notificationOccurred('success');
+            }, 4050);
         }
 
-        function copyRefLink() {
-            // Генерируем уникальную ссылку с ID пользователя
-            const userId = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.id : 'test_id';
-            const botUsername = 'ТвойБот_bot'; // <-- Вставь юзернейм своего бота
-            const refLink = `https://t.me/${botUsername}?start=${userId}`;
+        function closeRoulette() {
+            document.getElementById('rouletteArea').classList.add('hidden');
+            isSpinning = false;
+        }
 
-            navigator.clipboard.writeText(refLink).then(() => {
-                tg.showAlert('Ссылка скопирована! Отправь её друзьям.');
+        function renderInventory() {
+            const grid = document.getElementById('invGrid');
+            grid.innerHTML = '';
+            if (inventory.length === 0) {
+                grid.innerHTML = '<p style="grid-column: span 3; color: gray;">Пусто</p>';
+                return;
+            }
+            inventory.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = `inv-item ${item.rarity}`;
+                div.innerHTML = `<div>📦</div><div>${item.name}</div><div style="color:#fbbf24">★${item.price}</div>`;
+                grid.appendChild(div);
             });
         }
 
-        function showSection(id, btnElement) {
-            // Прячем все секции
-            document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
-            // Показываем нужную
-            document.getElementById(id).classList.remove('hidden');
+        function doUpgrade() {
+            if (inventory.length === 0) {
+                tg.showAlert('Инвентарь пуст! Сначала открой кейсы.');
+                return;
+            }
+            const resultText = document.getElementById('upgradeResult');
+            // Для простоты берем первый предмет
+            const itemToUpgrade = inventory[0];
 
-            // Обновляем цвет кнопок
+            // Забираем предмет
+            inventory.shift();
+
+            // Шанс 30% на успех
+            if (Math.random() < 0.3) {
+                const prize = { name: '★ Охотничий нож', rarity: 'epic', price: 10000 };
+                inventory.push(prize);
+                resultText.style.color = '#10b981';
+                resultText.innerText = '✅ УСПЕХ! Получен Охотничий нож!';
+            } else {
+                resultText.style.color = '#ef4444';
+                resultText.innerText = `❌ ПРОВАЛ! Скин ${itemToUpgrade.name} сгорел.`;
+            }
+            saveUserData();
+        }
+
+        function showSection(id, btnElement) {
+            document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
             document.querySelectorAll('.nav button').forEach(el => el.classList.remove('active'));
             btnElement.classList.add('active');
         }
+
+        updateUI(); // Загрузка при старте
     </script>
 </body>
 
